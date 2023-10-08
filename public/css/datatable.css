@@ -1,0 +1,11 @@
+.selected-row {
+    background-color: rgb(194,231,255) !important;
+}
+
+.visor{
+    height: 96%;
+}
+
+.iframe{
+    height: 100%;
+}

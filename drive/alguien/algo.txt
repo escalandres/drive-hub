@@ -1,0 +1,7 @@
+Para estructurar correctamente la carpeta "public" en tu servidor Node.js, es recomendable seguir la convención de diseño de aplicaciones web conocida como "Modelo Vista Controlador" (MVC).
+
+En este modelo, la carpeta "public" se utiliza para almacenar los archivos estáticos, como hojas de estilo CSS, archivos JavaScript y archivos multimedia. Dentro de la carpeta "public", puedes crear subcarpetas para organizar mejor tus archivos.
+
+Por ejemplo, podrías tener una subcarpeta llamada "css" para tus hojas de estilo CSS, otra subcarpeta llamada "js" para tus archivos JavaScript y una tercera subcarpeta llamada "img" para tus archivos multimedia.
+
+De esta manera, puedes acceder a los archivos estáticos desde tu código Node.js utilizando la ruta relativa a la carpeta "public". Por ejemplo, si tienes un archivo CSS llamado "estilos.css" dentro de la subcarpeta "css", podrías acceder a él desde tu archivo HTML utilizando la siguiente ruta:
