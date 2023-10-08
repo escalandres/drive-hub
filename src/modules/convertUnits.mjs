@@ -1,4 +1,4 @@
-function convertFileSize(fileSizeInBytes) {
+export function convertFileSize(fileSizeInBytes) {
     // console.log(fileSizeInBytes)
     if(fileSizeInBytes === ""){
         return "------";
@@ -16,7 +16,7 @@ function convertFileSize(fileSizeInBytes) {
     }
 }
 
-function convertFileDate(fechaEnFormatoPersonalizado) {
+export function convertFileDate(fechaEnFormatoPersonalizado) {
     const meses = [
         "ene", "feb", "mar", "abr", "may", "jun",
         "jul", "ago", "sep", "oct", "nov", "dic"
@@ -41,8 +41,8 @@ function convertFileDate(fechaEnFormatoPersonalizado) {
     }
 }
 
-module.exports = {
-    convertFileSize,
-    convertFileDate
-};
+// module.exports = {
+//     convertFileSize,
+//     convertFileDate
+// };
 

@@ -1,15 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const {convertFileSize, convertFileDate} = require('./convertUnits');
-
-// class Archivo {
-//     constructor(name, modificationDate, extension, size) {
-//         this.Name = name;
-//         this.ModificationDate = modificationDate;
-//         this.Extension = extension;
-//         this.Size = size;
-//     }
-// }
+import fs from 'fs';
+import path from 'path';
+import {convertFileSize, convertFileDate} from './convertUnits.mjs';
 
 class Archivo {
     constructor() {
@@ -34,12 +25,12 @@ class Folder {
 }
 
 // Busqueda carpeta actual
-function analizarCarpeta(userID,rutaCarpeta) {
-    console.log('analizar')
-    console.log(userID,rutaCarpeta)
+export function serveFiles(userID,rutaCarpeta) {
+    // console.log('analizar')
+    // console.log(userID,rutaCarpeta)
     const miFolder = new Folder('', "");
     const pathToSearch = rutaCarpeta === '' ? path.join('drive',userID) : path.join('drive',userID,rutaCarpeta)
-    console.log('path', pathToSearch)
+    // console.log('path', pathToSearch)
     // Obtener una lista de elementos en la carpeta
     const elementos = fs.readdirSync(pathToSearch);
     // console.log(elementos)
@@ -69,8 +60,4 @@ function analizarCarpeta(userID,rutaCarpeta) {
       miFolder.agregarArchivo(archivo1)
     });
     return miFolder;
-}
-
-module.exports = {
-    analizarCarpeta
 }
