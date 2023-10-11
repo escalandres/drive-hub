@@ -9,3 +9,99 @@
 .iframe{
     height: 100%;
 }
+
+tr:hover {
+    border-radius: 35%;
+    background-color: #f1efef;
+}
+
+/* -------------- Seccion de iconos -------------- */
+
+.i-icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+    transform: translateY(0.2rem);
+}
+.android-icon {
+    background-image: url('/icons/android.svg');
+}
+.apk-icon {
+    background-image: url('/icons/apk.svg');
+}
+.audio-icon {
+    background-image: url('/icons/audio.svg');
+}
+.code-icon {
+    background-image: url('/icons/code.svg');
+}
+.compressed-icon {
+    background-image: url('/icons/compressed.svg');
+}
+.css-icon {
+    background-image: url('/icons/css.svg');
+}
+.csv-icon {
+    background-image: url('/icons/csv.svg');
+}
+.excel-icon {
+    background-image: url('/icons/excel.svg');
+}
+.exe-icon {
+    background-image: url('/icons/exe.svg');
+}
+.folder-icon {
+    background-image: url('/icons/folder.svg');
+}
+.gif-icon {
+    background-image: url('/icons/gif2.svg');
+}
+.html-icon {
+    background-image: url('/icons/html.svg');
+}
+.img-icon {
+    background-image: url('/icons/img.svg');
+}
+.js-icon {
+    background-image: url('/icons/js.svg');
+}
+.music-icon {
+    background-image: url('/icons/music.svg');
+}
+.pdf-icon {
+    background-image: url('/icons/pdf-light.svg');
+}
+.ppt-icon {
+    background-image: url('/icons/ppt.svg');
+}
+.python-icon {
+    background-image: url('/icons/python.svg');
+}
+.ppt-icon {
+    background-image: url('/icons/ppt.svg');
+}
+.python-icon {
+    background-image: url('/icons/python.svg');
+}
+.svg-icon {
+    background-image: url('/icons/svg.svg');
+}
+.txt-icon {
+    background-image: url('/icons/txt.svg');
+}
+.unknown-icon {
+    background-image: url('/icons/unknown.svg');
+}
+.video-icon {
+    background-image: url('/icons/video.svg');
+}
+.word-icon {
+    background-image: url('/icons/word.svg');
+}
+.xml-icon {
+    background-image: url('/icons/xml.svg');
+}
+.zip-icon {
+    background-image: url('/icons/zip.svg');
+}
