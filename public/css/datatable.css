@@ -10,8 +10,15 @@
     height: 100%;
 }
 
+tr {
+    border: 1px solid rgb(199,199,199) !important;
+    /* border-top: 1px solid rgb(199,199,199) !important;
+    border-bottom: 1px solid rgb(199,199,199) !important; */
+    /* border-color: rgb(199,199,199); */
+}
+
 tr:hover {
-    border-radius: 35%;
+    /* border-radius: 35%; */
     background-color: #f1efef;
 }
 
