@@ -5,12 +5,12 @@ const MAIN_PATH = {
 
 function eliminarRutaPrincipal(cadenaOriginal) {
     // Definir la subcadena que deseas eliminar
-    const subcadenaAEliminar = '/drive/mydrive';
-    alert(subcadenaAEliminar)
+    const subcadenaAEliminar = '/drive/mydrive/';
+    // alert(subcadenaAEliminar)
     console.log('cadena',cadenaOriginal)
     // Utilizar el método replace para eliminar la subcadena
     const resultado = cadenaOriginal.replace(subcadenaAEliminar, '');
-    alert(resultado)
+    // alert(resultado)
     return resultado;
 }
 
@@ -30,7 +30,7 @@ function crearEnlacesDeRuta() {
 
     // Obtener elementos ruta del usuario
     const folders = eliminarRutaPrincipal(ruta)
-    
+    console.log('folders',folders)
     // Dividir la ruta en componentes
     const componentes = folders.split('/').filter(Boolean);
     console.log('componentes')
@@ -40,7 +40,8 @@ function crearEnlacesDeRuta() {
         const enlace = document.createElement('a');
         enlace.textContent = componentes[i];
         // Construir la URL a la que redirigir
-        const urlComponente = MAIN_PATH + folders.substring(0, folders.indexOf(componentes[i]) + componentes[i].length);
+        const urlComponente = MAIN_PATH + ruta.substring(0, ruta.indexOf(componentes[i]) + componentes[i].length);
+        console.log('urlComponente',urlComponente)
         enlace.href = urlComponente;
         
         // Agregar el elemento <a> al cuerpo del documento
