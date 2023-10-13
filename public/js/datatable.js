@@ -108,7 +108,7 @@ function agregarEventosRow(){
                 row.classList.remove("selected-row");
             });
             
-            // Agregar la clase 'selected-row' a la fila clicada
+            // Agregar la clase 'selected-row' a la fila seleccionada
             this.classList.add("selected-row");
         });
     });
@@ -238,7 +238,6 @@ function buscarIcono(fileExtension){
         '.accdb': 'database-icon',
         '.apk': 'apk-icon',
         '.app': 'unknown-icon',
-        '.as': 'page_white_actionscript-icon',
         '.asp': 'code-icon',
         '.aspx': 'code-icon',
         '.bat': 'terminal-icon',
