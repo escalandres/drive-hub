@@ -26,8 +26,6 @@ class Folder {
 
 var table = $('#fileTable').DataTable({
     "ordering": true,
-    "order": [[0, "asc"]],
-    //"order": [[0, "folder-first"]],
     "searching": true,
     "lengthChange": false,
     "language": {
@@ -50,10 +48,6 @@ var table = $('#fileTable').DataTable({
         { "targets": [1,2], "className": "text-center", "searchable": false },
         { "targets": [3,2], "orderable": false },
         { "targets": 3, "className": "", "searchable": false, "visible": false },
-        // {
-        //     "targets": 0, // La columna que deseas ordenar de manera personalizada
-        //     "type": 'folder-first' // Usa el tipo de ordenamiento personalizado 'folder-first'
-        // }
     ],
     "order": [[3,'asc'],[0,'asc']],
 });
@@ -83,7 +77,7 @@ function construirTabla(tableId, folderData) {
     table.draw();
 
     agregarEventosRow()
-    var elementoParaEliminar = document.getElementById("folderInfo"); // Reemplaza "miElemento" con el ID de tu elemento
+    var elementoParaEliminar = document.getElementById("folderInfo"); // ELiminamos el json que devuelve el servidor
     elementoParaEliminar.remove();
     agregarIcono()
   }
@@ -92,7 +86,7 @@ function consultarCarpeta(){
     try{
         var folderInfoDiv = document.getElementById("folderInfo");
         var texto = folderInfoDiv.textContent;
-        // Analiza el texto JSON en un objeto JavaScript
+        // Analiza el texto JSON en un objeto JavaScript ->
         var folderObj = JSON.parse(texto);
         construirTabla('fileTable',folderObj)
     }
