@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 //My modules
-import {serveFiles} from './src/modules/searchOnFolder.mjs'
+import {serveFiles} from './src/modules/searchOnFolder.mjs';
 
 //Variables modules
 const app = express();
@@ -16,11 +16,6 @@ const currentFileURL = import.meta.url;
 const currentFilePath = fileURLToPath(currentFileURL);
 // Obtiene el directorio del archivo actual
 const __dirname = dirname(currentFilePath);
-
-
-
-
-
 
 //settings
 app.use(express.json());
@@ -70,8 +65,9 @@ app.get('/drive/mydrive/:folder?', (req, res) => {
     const html = htmlTemplate
         .replace('{folderInfo}', JSON.stringify(folderInfo));
 
-    // Enviar el HTML al cliente
-    res.send(html);
+    // Enviar el HTML al cliente >= 
+    // -> 
+    res.send(html);  
 });
 
 app.use(handleNotFound);
