@@ -48,11 +48,14 @@ app.get('/', (req, res) => {
 });
 
 // Aplicar los middlewares en orden
-app.use('/drive/mydrive', (req,res,next) =>{
-    express.static(path.join(__dirname, 'drive','alguien'))(req, res, next);
+app.use('/drive/mydrive/:folder?', (req,res,next) =>{
+    const folder = req.params.folder ?? '';
+    console.log(folder)
+    const fullPath = path.join(__dirname, 'drive','alguien',folder);
+    express.static(fullPath)(req, res, next);
 });
 
-app.get('/drive/mydrive/:folder?', (req, res) => {
+app.get('/drive/mydrive/:folder(*)', (req, res) => {
     // console.log('a')
     const userID = 'alguien';
     // console.log(req.params.folder)

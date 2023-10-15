@@ -1,17 +1,24 @@
-const MAIN_PATH = {
-    path: "http://localhost:5321/drive/mydrive/",
-    name: "My Drive"
-}
+import { SERVER, DRIVE_FOLDER } from "./vars.js";
 
 function eliminarRutaPrincipal(cadenaOriginal) {
     // Definir la subcadena que deseas eliminar
-    const subcadenaAEliminar = '/drive/mydrive/';
+    const subcadenaAEliminar = DRIVE_FOLDER.path;
     // alert(subcadenaAEliminar)
     console.log('cadena',cadenaOriginal)
     // Utilizar el método replace para eliminar la subcadena
     const resultado = cadenaOriginal.replace(subcadenaAEliminar, '');
     // alert(resultado)
     return resultado;
+}
+
+function obtenerUltimaParteDeRuta(ruta) {
+    // Dividir la ruta en partes utilizando el separador '/'
+    const partes = ruta.split('/');
+    
+    // Obtener la última parte (el último elemento del array)
+    const ultimaParte = partes[partes.length - 2];
+    
+    return ultimaParte;
 }
 
 function crearEnlacesDeRuta() {
@@ -22,9 +29,9 @@ function crearEnlacesDeRuta() {
     console.log('ruta',ruta)
     //---------------------- Crear elemento principal --------------------
     const enlace = document.createElement('a');
-    enlace.textContent = MAIN_PATH.name;
+    enlace.textContent = DRIVE_FOLDER.name;
     // Construir la URL a la que redirigir
-    enlace.href = MAIN_PATH.path;
+    enlace.href = DRIVE_FOLDER.path;
     // Agregar el elemento <a> al cuerpo del documento
     pathContainer.appendChild(enlace);
 
@@ -40,7 +47,8 @@ function crearEnlacesDeRuta() {
         const enlace = document.createElement('a');
         enlace.textContent = componentes[i];
         // Construir la URL a la que redirigir
-        const urlComponente = MAIN_PATH + ruta.substring(0, ruta.indexOf(componentes[i]) + componentes[i].length);
+        const urlComponente = ruta.substring(0, ruta.indexOf(componentes[i]) + componentes[i].length);
+        // const urlComponente = SERVER + '/' + componentes[i];
         console.log('urlComponente',urlComponente)
         enlace.href = urlComponente;
         
@@ -52,6 +60,10 @@ function crearEnlacesDeRuta() {
             pathContainer.appendChild(separador);
         }
     }
+    let pathName = new URL(window.location.href);
+    pathName = obtenerUltimaParteDeRuta(pathName.pathname)
+    document.title = pathName + ' - ' + SERVER.name
+    console.log()
 }
 
     // Llamar a la función para crear los enlaces de la ruta
