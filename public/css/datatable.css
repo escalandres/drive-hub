@@ -19,6 +19,11 @@ tr:hover {
     background-color: #f1efef;
 }
 
+.dataTables_filter,
+.dataTables_info  {
+    display: none;
+}
+
 /* -------------- Seccion de iconos -------------- */
 
 .i-icon{

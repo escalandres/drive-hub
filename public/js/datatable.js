@@ -4,28 +4,6 @@ $(document).ready(function() {
     consultarCarpeta();
 });
 
-class Archivo {
-    constructor() {
-        this.Name = '';
-        this.ModificationDate = '';
-        this.Extension = '';
-        this.Size = '';
-    }
-}
-
-class Folder {
-    constructor(path, name) {
-        this.Path = path;
-        this.Name = name;
-        this.Archivos = []; // Inicializamos la lista de archivos como un array vacío
-    }
-
-    // Método para agregar un archivo a la lista de archivos
-    agregarArchivo(archivo) {
-        this.Archivos.push(archivo);
-    }
-}
-
 var table = $('#fileTable').DataTable({
     "ordering": true,
     "searching": true,
@@ -52,6 +30,11 @@ var table = $('#fileTable').DataTable({
         { "targets": 3, "className": "", "searchable": false, "visible": false },
     ],
     "order": [[3,'asc'],[0,'asc']],
+});
+
+$('#search').on('keyup', function() {
+    // console.log('search', this.value)
+    $('#fileTable').DataTable().search(this.value).draw();
 });
 
 function construirTabla(tableId, folderData) {
@@ -124,7 +107,21 @@ $('#fileTable tbody').on('dblclick', 'tr', function () {
     var currentURL = window.location.href;
     var _url = currentURL + selected;
     // alert(data["Extension"])
-    if(esPdfOImagen(data["Extension"])){
+    if(canBeShown(data["Extension"])){
+        // if (isImage(data["Extension"])) {
+        //     // Accede al contenido del iframe
+        //     console.log(visorPDF)
+        //     const iframeDocument = visorPDF.contentDocument;
+        //     console.log(iframeDocument)
+        //     console.log(visorPDF.contentWindow.document)
+        //     console.log(visorPDF.querySelectorAll('html'))
+        //     // Reduzca el tamaño de las imágenes dentro del iframe
+        //     const images = iframeDocument.querySelectorAll('img');
+        //     images.forEach(function(image) {
+        //         image.style.maxWidth = '300px'; // Esto ajusta el ancho de las imágenes al ancho del contenedor
+        //         image.style.height = '50px'; // Esto ajusta la altura de las imágenes proporcionalmente
+        //     });
+        // }
         visorPDF.src = _url;
         // Mostrar el modal si no está visible
         $("#div_visor").modal("show");
@@ -134,15 +131,30 @@ $('#fileTable tbody').on('dblclick', 'tr', function () {
     }
 });
 
-function esPdfOImagen(extension) {
+function canBeShown(extension) {
     // Convertir la extensión a minúsculas para hacer la comparación insensible a mayúsculas y minúsculas
     extension = extension.toLowerCase();
     
     // Lista de extensiones de archivos de imagen válidas
-    var extensionesImagen = [".jpg", ".jpeg", ".png", ".gif", ".txt", ".c"];
+    var extensionsAllowed = [".pdf",".jpg", ".jpeg", ".png", ".gif", ".txt", ".c"];
   
     // Comprobar si la extensión es un PDF o una extensión de imagen
-    if (extension === ".pdf" || extensionesImagen.includes(extension)) {
+    if (extensionsAllowed.includes(extension)) {
+      return true;
+    } else {
+      return false;
+    }
+}
+
+function isImage(extension) {
+    // Convertir la extensión a minúsculas para hacer la comparación insensible a mayúsculas y minúsculas
+    extension = extension.toLowerCase();
+    
+    // Lista de extensiones de archivos de imagen válidas
+    var extensionesImagen = [".jpg", ".jpeg", ".png", ".gif"];
+  
+    // Comprobar si la extensión es un PDF o una extensión de imagen
+    if ( extensionesImagen.includes(extension)) {
       return true;
     } else {
       return false;
@@ -151,19 +163,9 @@ function esPdfOImagen(extension) {
 
 $('#div_visor').on('hidden.bs.modal', function (event) {
     visorPDF.src = "";
+    // visorPDF.style.width = '600px'; // Nuevo ancho
+    // visorPDF.style.height = '600px'
 });
-
-function agregarIcono(){
-    var miTabla = $('#fileTable').DataTable();
-    miTabla.rows().every(function() {
-        var iconClass = buscarIcono(this.data().Extension); // Encuentra la clase de icono según el valor de la columna "Extension"
-        var iconElement = `<i class="i-icon ${iconClass}"></i> `; // Elemento <i> con la clase de icono
-    
-        // Agrega el elemento <i> antes del texto en la primera celda de la fila actual
-        var primeraCelda = this.node().getElementsByTagName('td')[0];
-        primeraCelda.innerHTML = iconElement + primeraCelda.innerHTML;
-    });
-}
 
 function buscarIcono(fileExtension){
     if(fileExtension === "") return 'folder-icon'
@@ -178,3 +180,16 @@ function buscarIcono(fileExtension){
         return 'unknown-icon';
     }
 }
+
+function agregarIcono(){
+    // var miTabla = $('#fileTable').DataTable();
+    table.rows().every(function() {
+        var iconClass = buscarIcono(this.data().Extension); // Encuentra la clase de icono según el valor de la columna "Extension"
+        var iconElement = `<i class="i-icon ${iconClass}"></i> `; // Elemento <i> con la clase de icono
+    
+        // Agrega el elemento <i> antes del texto en la primera celda de la fila actual
+        var primeraCelda = this.node().getElementsByTagName('td')[0];
+        primeraCelda.innerHTML = iconElement + primeraCelda.innerHTML;
+    });
+}
+

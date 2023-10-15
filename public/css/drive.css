@@ -1,0 +1,32 @@
+
+/* Navbar section */
+.nav-icon{
+    width: 30px;
+    height: 30px;
+}
+
+.s-icon {
+    position: absolute;
+    /* left: 11px;  */
+    /* top: 11px;  */
+    top: 30%;
+    left: 2%;
+    color: grey;
+}
+
+.input-container {
+    position: relative;
+}
+
+.search-input{
+    border-radius: 20px;
+}
+
+.icon-input {
+    padding-left: 40px !important; /* Espacio para el icono */
+}
+
+/* VisorPDF */
+/* iframe > img{
+    width: 100px;
+} */

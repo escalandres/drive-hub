@@ -10,11 +10,41 @@
     <!-- Estilos de DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="/css/datatable.css">
+    <link rel="stylesheet" href="/css/drive.css">
     <link rel="stylesheet" href="/css/routes.css">
     <link rel="shortcut icon" href="/icons/favicon.svg" type="image/x-icon">
     <title>Drive Hub</title>
 </head>
 <body>
+    <div class="main-container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Contenido del navbar -->
+            <div class="container-fluid">
+                <div class="row w-100">
+                    <div class="col-2 d-flex justify-content-center">
+                        <a class="navbar-brand" href="/drive/mydrive">
+                            <img class="nav-icon me-1" src="/icons/favicon.svg" alt="">
+                            <span>Drive Hub</span>
+                        </a>
+                    </div>
+                    <div class="col-8 d-flex justify-content-center">
+                        <div class="input-container w-100">
+                            <input type="text" class="form-control icon-input search-input" name="" id="search" placeholder="Buscar en My Drive" required>
+                            <i class="fa-solid fa-magnifying-glass s-icon"></i>
+                        </div>
+                    </div>
+                    <div class="col-1 d-flex justify-content-center align-items-center">
+                        <!-- <div class="form-check form-switch">
+                            <input class="form-check-input form-switch-input" type="checkbox" role="switch" id="theme-toggle">
+                        </div> -->
+                    </div>
+                    <div class="col-1 d-flex justify-content-center">
+                        <button id="logoutBtn" class="btn btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
     <div id="path-container" class="flex-row "></div>
     <div class="flex-row row mb-3">
         <div class="col-12" id="Scroll">
@@ -59,7 +89,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> 
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
-    <!-- <script type="module" src="/js/consts.js"></script> -->
     <script type="module" src="/js/datatable.js"></script>
     <script type="module" src="/js/routes.js"></script>
 </body>
