@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 // Aplicar los middlewares en orden
 app.use('/drive/mydrive/:folder?', (req,res,next) =>{
     const folder = req.params.folder ?? '';
-    console.log(folder)
+    // console.log(folder)
     const fullPath = path.join(__dirname, 'drive','alguien',folder);
     express.static(fullPath)(req, res, next);
 });

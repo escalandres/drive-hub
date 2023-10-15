@@ -42,8 +42,19 @@ function crearEnlacesDeRuta() {
     const componentes = folders.split('/').filter(Boolean);
     console.log('componentes')
     console.log(componentes)
+
     //---------------- Crear elementos <a> para cada componente de la ruta ---------------
     for (let i = 0; i < componentes.length; i++) {
+        console.log('i', i)
+        console.log('length', componentes.length)
+        // Agregar un separador ">" entre los enlaces, excepto para el último
+        if (i <= componentes.length - 1 || i === 0) {
+            // const separador = document.createTextNode(' > ');
+            const separador = document.createElement('span');
+            separador.textContent = ' > '
+            pathContainer.appendChild(separador);
+            console.log('>')
+        }
         const enlace = document.createElement('a');
         enlace.textContent = componentes[i];
         // Construir la URL a la que redirigir
@@ -54,16 +65,11 @@ function crearEnlacesDeRuta() {
         
         // Agregar el elemento <a> al cuerpo del documento
         pathContainer.appendChild(enlace);
-        // Agregar un separador ">" entre los enlaces, excepto para el último
-        if (i < componentes.length - 1) {
-            const separador = document.createTextNode(' > ');
-            pathContainer.appendChild(separador);
-        }
+        
     }
     let pathName = new URL(window.location.href);
     pathName = obtenerUltimaParteDeRuta(pathName.pathname)
     document.title = pathName + ' - ' + SERVER.name
-    console.log()
 }
 
     // Llamar a la función para crear los enlaces de la ruta
