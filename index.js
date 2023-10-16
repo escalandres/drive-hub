@@ -35,7 +35,7 @@ const authenticationMiddleware = (req, res, next) => {
 
 // Middleware para manejar rutas no encontradas
 const handleNotFound = (req, res, next) => {
-    console.log('err')
+    // console.log('err')
     return res.status(404).sendFile(path.join(__dirname,'src','views','error.html'));
 };
 
