@@ -50,8 +50,18 @@
     text-align: left !important;
 }
 
+.sidebar-text {
+    margin-left: 0.5em;
+}
 
+.dropend .dropdown-menu{
+    z-index: ppp;
+}
 
+main {
+    position: relative;
+    z-index: 1; /* Ajusta este valor según sea necesario */
+  }
 
 /* VisorPDF */
 /* iframe > img{
