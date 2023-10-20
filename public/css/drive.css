@@ -55,12 +55,22 @@
 }
 
 .dropend .dropdown-menu{
-    z-index: ppp;
+    z-index: 1000;
+}
+
+.z1000 {
+    position: absolute;
+    z-index: 1;
+}
+
+.z1{
+    position: relative;
+    z-index: 0;
 }
 
 main {
     position: relative;
-    z-index: 1; /* Ajusta este valor según sea necesario */
+    z-index: 0; /* Ajusta este valor según sea necesario */
   }
 
 /* VisorPDF */
