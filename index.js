@@ -1,4 +1,4 @@
-//NPM modules
+//NPM modules - ECMAScript Modules
 import fs from 'fs';
 import path from 'path';
 import express from 'express';
@@ -46,6 +46,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     return res.send('Bienvenido')
 });
+
+app.get('/login', (req,res)=>{
+    return res.sendFile(path.join(__dirname,'views','login.html'))
+})
 
 // Aplicar los middlewares en orden
 app.use('/drive/mydrive/:folder?', (req,res,next) =>{
