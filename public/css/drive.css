@@ -31,9 +31,12 @@
 }
 
 /* ------------------------- Sidebar section ------------------------------- */
-
-.sidebar {
+.sidebar-container{
     background-color: var(--sidebar-grey); /* Color de fondo de la barra lateral */
+}
+.sidebar {
+    
+    z-index: 10;
 }
 
 .sidebar-item{
@@ -55,7 +58,7 @@
 }
 
 .dropend .dropdown-menu{
-    z-index: 1000;
+    z-index: 1000!important;
 }
 
 .z1000 {
@@ -64,14 +67,22 @@
 }
 
 .z1{
-    position: relative;
-    z-index: 0;
+    position: relative!important;
+    z-index: 0!important;
 }
 
 main {
-    position: relative;
-    z-index: 0; /* Ajusta este valor según sea necesario */
-  }
+    position: relative!important;
+    z-index: 0!important; /* Ajusta este valor según sea necesario */
+}
+
+.w-98{
+    width: 98%!important;
+}
+
+.br{
+    background: red;
+}
 
 /* VisorPDF */
 /* iframe > img{

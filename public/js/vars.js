@@ -127,3 +127,9 @@ export const ICONS = {
     ".xcf": "img-icon",
     ".yaws": "code-icon"
 }
+
+export const ALERT_TYPE = {
+    success: "success",
+    error: "error",
+    info: "info"
+}

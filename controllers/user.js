@@ -1,10 +1,11 @@
-import 
+import { getUser, registerNewUser } from "./modules/database.mjs";
+import bcrypt from 'bcrypt';
 
 export async function login(req, res){
     try {
         const email = req.body.email;
         const password = req.body.password;
-        const result = await db.getUserByEmail(email)
+        const result = await getUser(email)
 
         if(!result.success){
             return res.status(404).json({success: false, message: "The user does not exist"})
@@ -14,6 +15,33 @@ export async function login(req, res){
         }
         req.session.user = { id: result.user.userId, email: result.user.email };
         return res.status(200).json({ success: true });
+    } catch (error) {
+        console.error(error);
+        // Enviar respuesta JSON indicando fallo
+        res.status(401).json({ success: false });
+    }
+}
+
+export async function signup(req,res){
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+        const name = req.body.name;
+        const userID = crypto.randomBytes(16).toString('hex');
+        const hashedPassword = await bcrypt.hash(password, 10);
+        console.log(email, password, name, userID);
+        // const response = await User.create({
+        //     userId, email, name, hashedPassword
+        // })1
+        const response = await registerNewUser({id: userID, email: email, name: name, password: hashedPassword})
+        console.log('response',response)
+        if(!response.success){
+            return res.status(401).json({success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente"})
+        }
+        const userFolder = path.join(__dirname,'ftp',userID)
+        fs.promises.mkdir(userFolder)
+        req.session.user = {id: userID, email: email}
+        res.status(200).json({success: true})
     } catch (error) {
         console.error(error);
         // Enviar respuesta JSON indicando fallo

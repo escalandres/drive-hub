@@ -1,3 +1,4 @@
+import { showLoading, hideLoading, alerta } from "./general.js";
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
@@ -16,8 +17,35 @@ function matchPassword() {
   var pw2 = document.getElementById("pswd2");  
   if(pw1 != pw2)  
   {   
-    alert("Passwords did not match");  
+    alerta.error("Passwords did not match");  
   } else {  
-    alert("Password created successfully");  
+    alerta.success("Password created successfully");  
   }  
 }  
+
+const form = document.getElementById('signup-form');
+
+form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    matchPassword()
+    //showLoading();
+    // const response = await fetch('/login', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         email: form.elements.email.value,
+    //         password: form.elements.password.value
+    //     })
+    // });
+    // hideLoading();
+    // const data = await response.json();
+    // if (!data.success) {
+    //     // Mostrar un mensaje de error si el inicio de sesión falla
+    //     // alert(data.message);
+    //     SendAlert("El usuario y/o contraseña no es válido","error")
+    // }else{
+    //     window.location.href = '/user'
+    // }
+});

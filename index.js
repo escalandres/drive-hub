@@ -6,8 +6,8 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 //My modules
-import {serveFiles} from './src/modules/searchOnFolder.mjs';
-
+import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
+import userRoutes from './routes/user.js';
 //Variables modules
 const app = express();
 // Obtiene la URL del archivo actual
@@ -48,8 +48,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req,res)=>{
-    return res.sendFile(path.join(__dirname,'views','login.html'))
+    return res.sendFile(path.join(__dirname,'src','views','login.html'))
 })
+
+app.use('/user', userRoutes);
 
 // Aplicar los middlewares en orden
 app.use('/drive/mydrive/:folder?', (req,res,next) =>{

@@ -45,94 +45,100 @@
                 </div>
             </div>
         </nav>
-        <div class="flex-row row">
-            <nav class="col-md-2 sidebar">
-                <!-- Contenido del sidebar -->
-                <div class="position-sticky top-0 p-3">
-                    <!-- <div class="dropend">
-                        <button id="new-btn" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-plus"></i> New
-                        </button>
-                        <ul class="dropdown-menu" style="opacity: 1;z-index: 1000;">
-                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"><i class="fa-solid fa-file-arrow-up"></i> Subir</a></li>
-                            <hr>
-                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createModal"><i class="fa-solid fa-folder-plus"></i> Crear</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
-                        </ul>
-                    </div> -->
-                    <div class="btn-group dropend">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropend
-                        </button>
-                            <ul class="dropdown-menu z1000">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <div class="flex-row row br p-3">
+            <div class="col-2 sidebar-container">
+                <nav class="sidebar">
+                    <!-- Contenido del sidebar -->
+                    <div class="position-sticky top-0 p-2">
+                        <!-- <div class="dropend">
+                            <button id="new-btn" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-plus"></i> New
+                            </button>
+                            <ul class="dropdown-menu" style="opacity: 1;z-index: 1000;">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"><i class="fa-solid fa-file-arrow-up"></i> Subir</a></li>
+                                <hr>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createModal"><i class="fa-solid fa-folder-plus"></i> Crear</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
                             </ul>
-                    </div>
-                    <!-- <hr> -->
-                    <ul class="nav nav-pills flex-column mb-auto pt-2">
-                        <li class="nav-item active">
-                            <a href="/" class="nav-link link-body-emphasis sidebar-item">
-                                <i class="fa-solid fa-hard-drive"></i><span class="sidebar-text">Home</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link link-body-emphasis sidebar-item">
-                                <i class="fa-solid fa-desktop"></i></i><span class="sidebar-text">Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link link-body-emphasis sidebar-item">
-                                <i class="fa-solid fa-cloud"></i><span class="sidebar-text">Storage</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <hr>
-                    <div class="row h40 d-flex align-content-center">
-                        <div class="col-8">Modo oscuro</div>
-                        <div class="col-4 container">
-                            <div class="form-check form-switch d-flex justify-content-end">
-                                <input class="form-check-input form-switch-input" type="checkbox" role="switch" id="theme-toggle">
-                            </div>
+                        </div> -->
+                        <div class="btn-group dropend">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropend
+                            </button>
+                                <ul class="dropdown-menu z1000">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
                         </div>
-                        
-                    </div>
-                    <i class="fa-solid fa-gear"></i>
-                    <div class="dropdown">
-                        <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                            <strong>mdo</strong>
-                        </a>
-                        <ul class="dropdown-menu text-small shadow">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <!-- <hr> -->
+                        <ul class="nav nav-pills flex-column mb-auto pt-2">
+                            <li class="nav-item active">
+                                <a href="/" class="nav-link link-body-emphasis sidebar-item">
+                                    <i class="fa-solid fa-hard-drive"></i><span class="sidebar-text">Home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link link-body-emphasis sidebar-item">
+                                    <i class="fa-solid fa-desktop"></i></i><span class="sidebar-text">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link link-body-emphasis sidebar-item">
+                                    <i class="fa-solid fa-cloud"></i><span class="sidebar-text">Storage</span>
+                                </a>
+                            </li>
                         </ul>
+                        <hr>
+                        <div class="row h40 d-flex align-content-center">
+                            <div class="col-8">Modo oscuro</div>
+                            <div class="col-4 container">
+                                <div class="form-check form-switch d-flex justify-content-end">
+                                    <input class="form-check-input form-switch-input" type="checkbox" role="switch" id="theme-toggle">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <i class="fa-solid fa-gear"></i>
+                        <div class="dropdown">
+                            <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong>mdo</strong>
+                            </a>
+                            <ul class="dropdown-menu text-small shadow">
+                                <li><a class="dropdown-item" href="#">New project...</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
-            <main class="col-md-10 ml-sm-auto col-lg-10 px-md-4 p-3 d-flex flex-column align-items-start z1">
-                <div id="path-container" class="flex-row w-100"></div>
-                <div class="flex-row row mb-3 w-100">
-                    <div class="col-12" id="Scroll">
-                        <table id="fileTable" class="table table-sm w-100 d-block d-xl-table table-hover borderless selector dt-body-center z1">
-                            <thead class="" style="width: 100%">
-                                <tr>
-                                    <th class="">Nombre</th>
-                                    <th class="">Fecha de Modificación</th>
-                                    <th class="">Tamaño</th>
-                                    <th class="">Extensión</th>
-                                </tr>
-                            </thead>
-                        </table>
+                </nav>
+            </div>
+            <div class="col-10 p-0">
+                <main id="" class="p-3 d-flex flex-column">
+                    <div id="path-container" class="flex-row w-98"></div>
+                    <div class="flex-row row w-98">
+                        <div class="col-12" id="Scroll">
+                            <table id="fileTable" class="table table-sm  d-block d-xl-table table-hover borderless selector dt-body-center">
+                                <thead class="" >
+                                    <tr>
+                                        <th class="">Nombre</th>
+                                        <th class="">Fecha de Modificación</th>
+                                        <th class="">Tamaño</th>
+                                        <th class="">Extensión</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
+            
+            
             
         </div>
     </div>

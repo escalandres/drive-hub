@@ -2,6 +2,7 @@
   "author": "",
   "dependencies": {
     "argon2": "^0.31.1",
+    "bcrypt": "^5.1.1",
     "ejs": "^3.1.9",
     "mongodb": "^6.1.0",
     "mongoose": "^7.6.0",
