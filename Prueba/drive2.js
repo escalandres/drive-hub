@@ -158,9 +158,7 @@ function consultarCarpeta(){
         // Analiza el texto JSON en un objeto JavaScript ->
         console.log(texto)
         var folderObj = JSON.parse(texto);
-        construirTabla('fileTable',folderObj)
-        document.getElementById("fileTable").style.zIndex = "1";
-        document.getElementById("fileTable").style.position = "relative";
+        construirTabla(folderObj)
     }
     catch(err){
         console.error(err)
@@ -169,9 +167,10 @@ function consultarCarpeta(){
     
 }
 
-function construirTabla(tableId, folderData) {
+// var table = document.getElementById("fileTable")
+
+function construirTabla(folderData) {
     // Obtener la referencia a la tabla por su ID
-    var table = $('#' + tableId).DataTable();
     
     // Limpiar la tabla antes de agregar nuevos datos (opcional)
     table.clear().draw();
@@ -199,6 +198,38 @@ function construirTabla(tableId, folderData) {
     agregarIcono()
   }
 
+// function construirTabla(folderData) {
+//     // Obtener una referencia a la tabla por su ID
+//     var table = document.getElementById('fileTable');
+//     var tbody = table.getElementsByTagName('tbody')[0];
+  
+//     // Limpiar la tabla antes de agregar nuevos datos (opcional)
+//     tbody.innerHTML = '';
+  
+//     // Iterar a través de la lista de archivos y agregar cada archivo a la tabla
+//     for (var i = 0; i < folderData.Archivos.length; i++) {
+//       var archivo = folderData.Archivos[i];
+  
+//       // Crear una nueva fila y celdas para cada archivo
+//       var newRow = tbody.insertRow();
+//       var cellName = newRow.insertCell(0);
+//       var cellModificationDate = newRow.insertCell(1);
+//       var cellSize = newRow.insertCell(2);
+//       var cellExtension = newRow.insertCell(3);
+  
+//       // Asignar los valores a las celdas
+//       cellName.textContent = archivo.Name;
+//       cellModificationDate.textContent = archivo.ModificationDate;
+//       cellSize.textContent = archivo.Size;
+//       cellExtension.textContent = archivo.Extension;
+//     }
+//     agregarEventosRow()
+//     var elementoParaEliminar = document.getElementById("folderInfo"); // ELiminamos el json que devuelve el servidor
+//     elementoParaEliminar.remove();
+//     agregarIcono()
+//     // eliminarYReinsertarUL()
+//   }
+
   function buscarIcono(fileExtension){
     if(fileExtension === "") return 'folder-icon'
     // Busca el tipo de archivo en el objeto icons
@@ -224,6 +255,36 @@ function agregarIcono(){
         primeraCelda.innerHTML = iconElement + primeraCelda.innerHTML;
     });
 }
+
+// function agregarIcono(){
+//     var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+//     for (var i = 0; i < rows.length; i++) {
+//       var row = rows[i];
+//       var iconClass = buscarIcono(row.cells[3].textContent); // Encuentra la clase de icono según el valor de la columna "Extension"
+//       var iconHtml = '<i class="i-icon ' + iconClass + '"></i> ';
+//       row.cells[0].innerHTML = iconHtml + row.cells[0].innerHTML;
+//     }
+// }
+
+function eliminarYReinsertarUL() {
+    // Obtener una referencia al elemento <ul> que deseas eliminar
+    var ulElement = document.getElementById('miUL'); // Reemplaza 'miUL' con el ID de tu elemento <ul>
+  
+    // Obtener el padre del elemento <ul> para poder reinsertarlo en el mismo lugar
+    var parentElement = ulElement.parentNode;
+  
+    // Clonar el elemento <ul> para conservar su contenido
+    var clonedUL = ulElement.cloneNode(true);
+  
+    // Eliminar el elemento <ul> original
+    parentElement.removeChild(ulElement);
+  
+    // Volver a insertar el elemento clonado en su lugar
+    parentElement.appendChild(clonedUL);
+  }
+
+  
 
 function agregarEventosRow(){
     var tbody = document.querySelector("tbody"); // Selecciona el tbody en lugar de todas las filas

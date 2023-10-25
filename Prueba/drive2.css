@@ -23,30 +23,33 @@
     border-radius: 15px!important;
 }
 
-.icon{
-    margin-right: 1em;
-}
+
 
 .dataTables_filter,
 .dataTables_info  {
     display: none;
 }
 
-.dataTables_wrapper {
-    position: relative;
-  }
-
-  #fileTable{
-    position: relative;
-  }
+td:first-child{
+    display: flex;
+    align-items: center;
+}
 
 .i-icon{
     display: inline-block;
     width: 20px;
     height: 20px;
     margin-right: 0.5rem;
-    transform: translateY(0.2rem);
+    /* transform: translateY(0.2rem);
+    -webkit-transform: translateY(0.2rem);
+    -moz-transform: translateY(0.2rem);
+    -ms-transform: translateY(0.2rem);
+    -o-transform: translateY(0.2rem); */
 }
+.dropdown-menu {
+    z-index: 1000!important; /* Puedes ajustar este valor según tus necesidades */
+  }
+
 .android-icon {
     background-image: url('./icons/android.svg');
 }
@@ -127,4 +130,54 @@
 }
 .zip-icon {
     background-image: url('./icons/zip.svg');
+}
+
+/* .dataTables_wrapper table td, .dataTables_wrapper table th {
+    overflow: visible !important;
+    cursor: pointer;
+  } */
+
+  #path-container{
+    font-weight: 400;
+    font-size: 1.25em;
+    color: rgb(68, 71, 70);
+    display: flex;
+    flex-direction: row;
+    padding: 0.3em 0.5em;
+    justify-content: left;
+}
+
+.no-space{
+    display: inline;
+}
+
+#path-container > a,
+#path-container > span {
+    display: inline;
+    color: rgb(68, 71, 70);
+    padding: 5px 15px;
+  /* Otras propiedades de estilo si es necesario */
+}
+
+#path-container > a {
+    
+    border-radius: 10%;
+    /* display: inline; */
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    /* width: 10%; */
+}
+
+#path-container > a:hover {
+    
+    background-color: rgb(237, 237, 237);
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 10%;
+    -ms-border-radius: 10%;
+    -o-border-radius: 10%;
+}
+
+table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
+    position: static!important;
 }
