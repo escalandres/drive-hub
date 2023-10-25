@@ -46,9 +46,6 @@ td:first-child{
     -ms-transform: translateY(0.2rem);
     -o-transform: translateY(0.2rem); */
 }
-.dropdown-menu {
-    z-index: 1000!important; /* Puedes ajustar este valor según tus necesidades */
-  }
 
 .android-icon {
     background-image: url('./icons/android.svg');
@@ -137,7 +134,7 @@ td:first-child{
     cursor: pointer;
   } */
 
-  #path-container{
+#path-container{
     font-weight: 400;
     font-size: 1.25em;
     color: rgb(68, 71, 70);
@@ -178,6 +175,10 @@ td:first-child{
     -o-border-radius: 10%;
 }
 
-table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
+table.dataTable>thead {
     position: static!important;
+}
+
+table.dataTable>thead:hover{
+    position: relative!important;
 }

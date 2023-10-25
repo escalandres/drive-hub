@@ -9,6 +9,11 @@
     height: 30px;
 }
 
+.container-fluid{
+    display: flex;
+    flex-direction: row;
+}
+
 .s-icon {
     position: absolute;
     /* left: 11px;  */
@@ -34,10 +39,6 @@
 .sidebar-container{
     background-color: var(--sidebar-grey); /* Color de fondo de la barra lateral */
 }
-.sidebar {
-    
-    z-index: 10;
-}
 
 .sidebar-item{
     color: var(--active-link) !important;
@@ -55,25 +56,6 @@
 
 .sidebar-text {
     margin-left: 0.5em;
-}
-
-.dropend .dropdown-menu{
-    z-index: 1000!important;
-}
-
-.z1000 {
-    position: absolute;
-    z-index: 1;
-}
-
-.z1{
-    position: relative!important;
-    z-index: 0!important;
-}
-
-main {
-    position: relative!important;
-    z-index: 0!important; /* Ajusta este valor según sea necesario */
 }
 
 .w-98{

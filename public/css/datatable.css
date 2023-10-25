@@ -1,3 +1,11 @@
+:root{
+    --bg-grey: rgb(247,249,252);
+}
+
+.containers{
+    background: var(--bg-grey);
+}
+
 .selected-row {
     background-color: rgb(194,231,255) !important;
 }
@@ -19,9 +27,26 @@ tr:hover {
     background-color: #f1efef;
 }
 
+td:first-child{
+    display: flex;
+    align-items: center;
+}
+
 .dataTables_filter,
 .dataTables_info  {
     display: none;
+}
+
+table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
+    position: static!important;
+}
+
+table.dataTable>thead .sorting:hover{
+    position: relative!important;
+}
+
+table.dataTable>thead .sorting_asc:hover{
+    position: relative!important;
 }
 
 /* -------------- Seccion de iconos -------------- */
@@ -31,7 +56,6 @@ tr:hover {
     width: 20px;
     height: 20px;
     margin-right: 0.5rem;
-    transform: translateY(0.2rem);
 }
 .android-icon {
     background-image: url('/icons/android.svg');

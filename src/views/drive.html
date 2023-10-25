@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://trusted-cdn.com; style-src 'self' https://trusted-cdn.com 'unsafe-inline'; img-src 'self' https://trusted-cdn.com data:; font-src 'self' https://trusted-cdn.com; object-src 'none';"/> -->
-    <link rel="shortcut icon" href="/img/favicon.svg" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></link>
     <!-- Estilos de Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
@@ -42,24 +41,11 @@
                 </div>
             </div>
         </nav>
-        <div class="flex-row row br p-3">
+        <div class="flex-row row p-3">
             <div class="col-2 sidebar-container">
                 <nav class="sidebar">
                     <!-- Contenido del sidebar -->
                     <div class="position-sticky top-0 p-2">
-                        <!-- <div class="dropend">
-                            <button id="new-btn" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-plus"></i> New
-                            </button>
-                            <ul class="dropdown-menu" style="opacity: 1;z-index: 1000;">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"><i class="fa-solid fa-file-arrow-up"></i> Subir</a></li>
-                                <hr>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createModal"><i class="fa-solid fa-folder-plus"></i> Crear</a></li>
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Sign out</a></li>
-                            </ul>
-                        </div> -->
                         <div class="btn-group dropend">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropend
@@ -74,17 +60,17 @@
                         <ul class="nav nav-pills flex-column mb-auto pt-2">
                             <li class="nav-item active">
                                 <a href="/" class="nav-link link-body-emphasis sidebar-item">
-                                    <i class="fa-solid fa-hard-drive"></i><span class="sidebar-text">Home</span>
+                                    <i class="fa-solid fa-hard-drive icon"></i><span class="sidebar-text">Home</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link link-body-emphasis sidebar-item">
-                                    <i class="fa-solid fa-desktop"></i></i><span class="sidebar-text">Dashboard</span>
+                                    <i class="fa-solid fa-desktop icon"></i></i><span class="sidebar-text">Dashboard</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link link-body-emphasis sidebar-item">
-                                    <i class="fa-solid fa-cloud"></i><span class="sidebar-text">Storage</span>
+                                    <i class="fa-solid fa-cloud icon"></i><span class="sidebar-text">Storage</span>
                                 </a>
                             </li>
                         </ul>
@@ -115,10 +101,10 @@
                     </div>
                 </nav>
             </div>
-            <div class="col-10 p-0">
-                <main id="" class="p-3 d-flex flex-column">
-                    <div id="path-container" class="flex-row w-98"></div>
-                    <div class="flex-row row w-98">
+            <div class="col-10 containers p-3">
+                <div class="flex-row cont p-3 shadow-sm bg-white">
+                    <div id="path-container" class="flex-row"></div>
+                    <div class="flex-row">
                         <div class="col-12" id="Scroll">
                             <table id="fileTable" class="table table-sm  d-block d-xl-table table-hover borderless selector dt-body-center">
                                 <thead class="" >
@@ -131,29 +117,13 @@
                                 </thead>
                             </table>
                         </div>
+                        
                     </div>
-                </main>
+                </div>
+                
             </div>
-            
-            
-            
         </div>
     </div>
-    <!-- <div id="path-container" class="flex-row "></div>
-    <div class="flex-row row mb-3">
-        <div class="col-12" id="Scroll">
-            <table id="fileTable" class="table table-sm w-100 d-block d-xl-table table-hover borderless selector dt-body-center">
-                <thead class="" style="width: 100%">
-                    <tr>
-                        <th class="">Nombre</th>
-                        <th class="">Fecha de Modificación</th>
-                        <th class="">Tamaño</th>
-                        <th class="">Extensión</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div> -->
 
     <!-- Modal -->
     <div class="modal fade visor" id="div_visor" tabindex="-1" data-backdrop="static" data-keyboard="false">
@@ -174,7 +144,7 @@
         </div>
     </div>
 
-    <div id="folderInfo">{folderInfo}</div>
+    <div id="folderInfo" style="display: none;">{folderInfo}</div>
 
     <!-- Librerías JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
