@@ -34,7 +34,6 @@ function crearEnlacesDeRuta() {
     // Obtener la URL actual del navegador
     const url = new URL(window.location.href);
     const ruta = url.pathname; // Obtener la ruta
-    console.log('ruta',ruta)
     //---------------------- Crear elemento principal --------------------
     const enlace = document.createElement('a');
     enlace.textContent = DRIVE_FOLDER.name;
@@ -77,6 +76,7 @@ function crearEnlacesDeRuta() {
     }
     let pathName = new URL(window.location.href);
     pathName = obtenerUltimaParteDeRuta(pathName.pathname)
+    alert(pathName)
     document.title = pathName + ' - ' + SERVER.name
 }
 

@@ -1,6 +1,6 @@
 export const SERVER = {
     path: "localhost:5321",
-    name: "Drive Hub"
+    name: "Drive Hub",
 }
 
 export const DRIVE_FOLDER = {

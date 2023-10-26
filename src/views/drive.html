@@ -41,14 +41,14 @@
                 </div>
             </div>
         </nav>
-        <div class="flex-row row p-3 containers">
+        <div class="flex-row row p-3 containers side-table-container">
             <div class="col-2 sidebar-container">
                 <nav class="sidebar">
                     <!-- Contenido del sidebar -->
                     <div class="position-sticky top-0 p-2">
                         <div class="btn-group dropend">
-                            <button id="drop-btn" type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropend
+                            <button id="drop-btn" type="button" class="btn shadow-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-plus me-3"></i>New
                             </button>
                             <ul id="new-drop" class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
@@ -57,7 +57,7 @@
                             </ul>
                         </div>
                         <!-- <hr> -->
-                        <ul class="nav nav-pills flex-column mb-auto pt-2">
+                        <ul class="nav nav-pills flex-column mb-auto pt-3">
                             <li class="nav-item active">
                                 <a href="/" class="nav-link link-body-emphasis sidebar-item">
                                     <i class="fa-solid fa-hard-drive icon"></i><span class="sidebar-text">Home</span>
@@ -101,23 +101,24 @@
                     </div>
                 </nav>
             </div>
-            <div class="col-10 containers p-3">
-                <div class="flex-row cont p-3 shadow-sm bg-white">
+            <div class="col-10 containers px-3 card-container">
+                <div class="flex-row cont p-3 shadow-sm bg-white table-container">
                     <div id="path-container" class="flex-row"></div>
-                    <div class="flex-row">
-                        <div class="col-12" id="Scroll">
-                            <table id="fileTable" class="table table-sm  d-block d-xl-table table-hover borderless selector dt-body-center">
-                                <thead class="" >
-                                    <tr>
-                                        <th class="">Nombre</th>
-                                        <th class="">Fecha de Modificación</th>
-                                        <th class="">Tamaño</th>
-                                        <th class="">Extensión</th>
-                                    </tr>
-                                </thead>
-                            </table>
+                    <div class="flex-row ">
+                        <div class="col-12 " id="Scroll">
+                            <div class="table-scroll">
+                                <table id="fileTable" class="table table-sm  d-block d-xl-table table-hover borderless selector dt-body-center">
+                                    <thead class="" >
+                                        <tr>
+                                            <th class="">Nombre</th>
+                                            <th class="">Fecha de Modificación</th>
+                                            <th class="">Tamaño</th>
+                                            <th class="">Extensión</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
-                        
                     </div>
                 </div>
                 

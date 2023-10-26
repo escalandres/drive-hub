@@ -1,5 +1,8 @@
 :root{
     --bg-grey: rgb(247,249,252);
+    --light-blue: rgb(194,231,255);
+    --hover-row: #f1efef;
+    --tr-gray: rgb(199,199,199);
 }
 
 .containers{
@@ -7,7 +10,7 @@
 }
 
 .selected-row {
-    background-color: rgb(194,231,255) !important;
+    background-color: var(--light-blue) !important;
 }
 
 .visor{
@@ -19,12 +22,12 @@
 }
 
 tr {
-    border: 1px solid rgb(199,199,199) !important;
+    border: 1px solid var(--tr-gray) !important;
 }
 
 tr:hover {
     /* border-radius: 35%; */
-    background-color: #f1efef;
+    background-color: var(--hover-row);
 }
 
 td:first-child{
@@ -36,28 +39,6 @@ td:first-child{
 .dataTables_info  {
     display: none;
 }
-
-/* table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
-    position:static!important;
-}
-
-table.dataTable>thead .sorting:hover{
-    position: relative!important;
-} */
-
-/* table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
-    position:static!important;
-    text-align: left;
-}
-
-table.dataTable>thead .sorting_asc:hover{
-    position: relative!important;
-} */
-
-/* th{
-    position: static;
-    text-align: left;
-} */
 
 /* -------------- Seccion de iconos -------------- */
 

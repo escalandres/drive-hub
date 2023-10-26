@@ -1,6 +1,47 @@
 :root{
     --active-link: #0d6efd;
     --sidebar-grey: rgb(248,249,250);
+    --new-black: rgb(31,31,31);
+    --light-blue: rgb(194,231,255);
+    --scrollbar-color: rgb(199,199,199);
+    --scrollbar-hover: rgb(116,119,117);
+}
+body{
+    background: var(--sidebar-grey);
+}
+.br{
+    background: red;
+}
+/* --------------------- Main Container ----------------------- */
+.main-container{
+    display: flex;
+    flex-direction: column;
+    height: 97vh;
+}
+
+.side-table-container{
+    flex-grow: 1;
+    max-width: 100%;
+    overflow: hidden;
+    /* width: 100vw; */
+}
+
+.card-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.table-container{
+    flex-grow: 1;
+    /* overflow: hidden; */
+    /* max-height: 300px; */
+}
+
+.table-scroll {
+    /* max-height: 300px; */
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: auto!important; 
 }
 
 /* --------------------- Navbar section ----------------------- */
@@ -62,15 +103,56 @@
     margin-left: 0.5em;
 }
 
-.w-98{
-    width: 98%!important;
+#drop-btn{
+    background: #fff;
+    color: var(--new-black);
+    padding: 1em;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
 }
 
-.br{
-    background: red;
+#drop-btn::after {
+    content: none; /* Establecer el contenido en "none" para eliminar el pseudo-elemento */
 }
+
+#drop-btn:hover{
+    background: var(--light-blue);
+}
+
 
 /* VisorPDF */
 /* iframe > img{
     width: 100px;
 } */
+
+/* Personalización de la barra de desplazamiento vertical */
+::-webkit-scrollbar {
+    width: 7px;
+    
+}
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color); /* Color del "pulgares" (la parte que puedes arrastrar) */
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-hover); /* Color del "pulgares" en el estado de "hover" */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #fff; /* Color de fondo de la barra de desplazamiento */
+  }
+  
+  /* Ocultar las flechas de la barra de desplazamiento */
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+  

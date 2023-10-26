@@ -18,16 +18,15 @@ var table = $('#fileTable').DataTable({
     },
     "paging": false, // Deshabilitar la paginación de DataTables
     "columns": [
-        { "width": "70%", "data": "Name" },
-        { "width": "20%", "data": "ModificationDate" },
-        { "width": "10%", "data": "Size" },
+        { "width": "64%", "data": "Name" },
+        { "width": "23%", "data": "ModificationDate" },
+        { "width": "13%", "data": "Size" },
         { "width": "1%", "data": "Extension" },
     ],
     "columnDefs": [
         { "targets": 0, "className": "text-left" },
         { "targets": [1,2], "className": "text-center", "searchable": false },
-        { "targets": [3,2], "orderable": false },
-        { "targets": 3, "className": "", "searchable": false, "visible": false },
+        { "targets": 3, "className": "", "searchable": false, "visible": false, "orderable": false },
     ],
     "order": [[3,'asc'],[0,'asc']],
 });
@@ -136,7 +135,7 @@ function canBeShown(extension) {
     extension = extension.toLowerCase();
     
     // Lista de extensiones de archivos de imagen válidas
-    var extensionsAllowed = [".pdf",".jpg", ".jpeg", ".png", ".gif", ".txt", ".c"];
+    var extensionsAllowed = [".pdf",".jpg", ".jpeg", ".png", ".gif", ".txt", ".c", ".svg", ".html", ".css", ".js", ".csharp"];
   
     // Comprobar si la extensión es un PDF o una extensión de imagen
     if (extensionsAllowed.includes(extension)) {
@@ -207,10 +206,13 @@ function updateSortingClasses() {
         th.classList.remove('sorting');
         th.classList.remove('sorting_asc');
         th.classList.remove('sorting_desc');
+        th.classList.remove('sorting_disabled');
+        // document.documentElement.style.overflowY = "hidden"; 
       });
     } else {
       thElements.forEach(function(th) {
         th.classList.add('sorting');
+        // document.documentElement.style.overflowY = "scroll";
       });
     //   $('#fileTable th:first').addClass('sorting_asc');
     }

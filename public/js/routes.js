@@ -4,7 +4,6 @@ function eliminarRutaPrincipal(cadenaOriginal) {
     // Definir la subcadena que deseas eliminar
     const subcadenaAEliminar = DRIVE_FOLDER.path;
     // alert(subcadenaAEliminar)
-    console.log('cadena',cadenaOriginal)
     // Utilizar el método replace para eliminar la subcadena
     const resultado = cadenaOriginal.replace(subcadenaAEliminar, '');
     // alert(resultado)
@@ -26,7 +25,6 @@ function crearEnlacesDeRuta() {
     // Obtener la URL actual del navegador
     const url = new URL(window.location.href);
     const ruta = url.pathname; // Obtener la ruta
-    console.log('ruta',ruta)
     //---------------------- Crear elemento principal --------------------
     const enlace = document.createElement('a');
     enlace.textContent = DRIVE_FOLDER.name;
@@ -37,7 +35,6 @@ function crearEnlacesDeRuta() {
 
     // Obtener elementos ruta del usuario
     const folders = eliminarRutaPrincipal(ruta)
-    console.log('folders',folders)
     // Dividir la ruta en componentes
     const componentes = folders.split('/').filter(Boolean);
     console.log('componentes')
@@ -53,14 +50,12 @@ function crearEnlacesDeRuta() {
             const separador = document.createElement('span');
             separador.textContent = ' > '
             pathContainer.appendChild(separador);
-            console.log('>')
         }
         const enlace = document.createElement('a');
         enlace.textContent = componentes[i];
         // Construir la URL a la que redirigir
         const urlComponente = ruta.substring(0, ruta.indexOf(componentes[i]) + componentes[i].length);
         // const urlComponente = SERVER + '/' + componentes[i];
-        console.log('urlComponente',urlComponente)
         enlace.href = urlComponente;
         
         // Agregar el elemento <a> al cuerpo del documento
@@ -68,8 +63,11 @@ function crearEnlacesDeRuta() {
         
     }
     let pathName = new URL(window.location.href);
-    pathName = obtenerUltimaParteDeRuta(pathName.pathname)
-    document.title = pathName + ' - ' + SERVER.name
+    if(pathName.pathname !== DRIVE_FOLDER.path){
+        pathName = obtenerUltimaParteDeRuta(pathName.pathname)
+        document.title = `${pathName} - ${SERVER.name}`
+    }
+    
 }
 
     // Llamar a la función para crear los enlaces de la ruta

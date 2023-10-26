@@ -1,0 +1,70 @@
+\documentclass[11pt, singlecolumn, citestyle=authoryear]{elegantbook}
+\definecolor{customcolor}{RGB}{153,204,255}
+\colorlet{coverlinecolor}{customcolor}
+
+\begin{document}
+\mainmatter
+
+
+\chapter*{P2. Ejercicios BD}
+
+\begin{center}
+Equipo 4:\\
+Ugalde Guerrero Ivonne Alejandra\\
+Escala Acosta Andrés Rafael
+\end{center}
+
+\section{Ejercicios: }
+
+\begin{enumerate}
+    \item{
+        \begin{itemize}
+            \item {\textbf{¿Cómo funciona?}: La fragmentación derivada consiste en dividir una relación partiendo de los predicados definidos de alguna otra. Se realiza sobre una fragmentación ya hecha o sobre los atributos que están presentes en otra relación, ambas tablas deben tener un atributo que las relacione.}
+            \item {\textbf{¿Cual es su representación en álgebra relacional?}:
+                La relación $R$ a fragmentar depende de la relación $Q$.
+                \begin{center}
+                    $R_{i} = R \ltimes Q_{i}$
+                \end{center} 
+                Donde: 
+                \begin{itemize}
+                    \item $Q_{i}$ corresponde al conjunto de fragmentos en los que se ha dividido la relación Q.
+                    \item La \textbf{\textit{semicombinación}} ($\ltimes$) se hace por el atributo que relacionan estas dos tablas.
+                \end{itemize}
+            }
+            \item {\textbf{¿Cual es la sentencia SELECT adecuada para representar este tipo de fragmentación?}
+                \begin{center}
+                 SELECT columna1, columna2, ... FROM tablaOriginal\\
+                WHERE criterio_de_fragmentacion;\\   
+                \end{center}
+            }
+        \end{itemize}
+    }
+    \item{Los incisos del ejercicio 2 se entregaron a mano, durante la clase}
+    \item{Los incisos del ejercicio 3 se entregaron a mano, durante la clase}
+    \item{Los incisos del ejercicio 4 se entregaron a mano, durante la clase}
+    \item {
+        \begin{itemize}
+            \item {\[P1 = \pi_{idProducto, noMarca, idEmpleado}(Producto)\]}
+            \item {\[P2 = \pi_{idProducto, nombreProducto, tipoProducto, cantidad}(Producto)\]}
+        \end{itemize}
+    }
+    \item {
+        \begin{itemize}
+            \item {\[P1 = \pi_{idActividad, nombre, idPrograma}(Actividad)\]}
+            \item {\[P2 = \pi_{idPrograma, nombre, numActividades, vigencia}(Programa)\]}
+        \end{itemize}
+    }
+    \item {
+        \begin{itemize}
+            \item {\[P1 = \sigma_{tipoProducto = "nacional"}(\pi_{idProducto, noMarca, idGestorProducto}(Producto))\]}
+            \item {\[P2 = \sigma_{tipoProducto = "internacional"}(\pi_{idProducto, noMarca, idGestorProducto}(Producto))\]}
+            \item {\[P3 = \sigma_{tipoProducto = "nacional"}(\pi_{idProducto, nombreProducto, tipoProducto, cantidad}(Producto))\]}
+            \item {\[P4 = \sigma_{tipoProducto = "internacional"}(\pi_{idProducto, nombreProducto, tipoProducto, cantidad}(Producto))\]}
+            \item {\[P5 = P1 \cap P2\]}
+        \end{itemize}
+    }
+\end{enumerate}
+
+
+\end{document}
+
