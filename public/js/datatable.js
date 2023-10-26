@@ -193,3 +193,29 @@ function agregarIcono(){
     });
 }
 
+function isMenuVisible() {
+    var newDropMenu = document.getElementById('new-drop');
+    return newDropMenu.classList.contains('show');
+  }
+
+// Función para modificar las clases de los th
+function updateSortingClasses() {
+    var thElements = document.querySelectorAll('#fileTable th');
+    
+    if (isMenuVisible()) {
+      thElements.forEach(function(th) {
+        th.classList.remove('sorting');
+        th.classList.remove('sorting_asc');
+        th.classList.remove('sorting_desc');
+      });
+    } else {
+      thElements.forEach(function(th) {
+        th.classList.add('sorting');
+      });
+    //   $('#fileTable th:first').addClass('sorting_asc');
+    }
+  }
+
+document.getElementById('drop-btn').addEventListener('click', function() {
+    updateSortingClasses();
+  });

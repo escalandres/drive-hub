@@ -37,17 +37,27 @@ td:first-child{
     display: none;
 }
 
-table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
-    position: static!important;
+/* table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
+    position:static!important;
 }
 
 table.dataTable>thead .sorting:hover{
     position: relative!important;
+} */
+
+/* table.dataTable>thead .sorting, table.dataTable>thead .sorting_asc{
+    position:static!important;
+    text-align: left;
 }
 
 table.dataTable>thead .sorting_asc:hover{
     position: relative!important;
-}
+} */
+
+/* th{
+    position: static;
+    text-align: left;
+} */
 
 /* -------------- Seccion de iconos -------------- */
 
