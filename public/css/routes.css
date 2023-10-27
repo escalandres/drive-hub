@@ -1,7 +1,11 @@
+:root{
+    --path-gray: rgb(68,71,70);
+}
+
 #path-container{
     font-weight: 400;
     font-size: 1.25em;
-    color: rgb(68, 71, 70);
+    color: var(--path-gray);
     display: flex;
     flex-direction: row;
     padding: 0.3em 0.5em;
@@ -15,7 +19,7 @@
 #path-container > a,
 #path-container > span {
     display: inline;
-    color: rgb(68, 71, 70);
+    color: var(--path-gray);
     padding: 5px 15px;
   /* Otras propiedades de estilo si es necesario */
 }

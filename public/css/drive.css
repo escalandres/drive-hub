@@ -6,6 +6,7 @@
     --scrollbar-color: rgb(199,199,199);
     --scrollbar-hover: rgb(116,119,117);
     --newbtn-gray: rgb(68,71,70);
+    --path-hover: rgb(227, 227, 227);
 }
 *{
     margin: 0;
@@ -50,6 +51,36 @@ body{
     overflow-y: auto!important; 
 }
 
+.transparent{
+    opacity: 0.1!important;
+}
+
+.full{
+    opacity: 1!important;
+}
+
+/* iframe{
+    height: 406px;
+} */
+
+.iframe-container{
+    /* Establece la posición relativa en el contenedor */
+    padding-bottom: 56.25%; /* Define la relación de aspecto (16:9) */
+    max-height: 40vh;
+}
+
+.iframe-container iframe {
+    position: absolute; /* Establece la posición absoluta en el iframe */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    height: 100%; /* Ocupa todo el alto del contenedor */
+    min-height: 595px;
+    background-color: white;
+    color: black;
+}
+
+
 /* --------------------- Navbar section ----------------------- */
 .nav-icon{
     width: 30px;
@@ -90,13 +121,16 @@ body{
 }
 
 .sidebar-item{
-    color: var(--active-link) !important;
+    /* color: var(--active-link) !important; */
+    color: var(--newbtn-gray) !important;
     text-align: left;
+    border-radius: 20px!important;
 }
 
 .sidebar-item:hover{
-    background-color: var(--active-link);
-    color: azure!important;
+    /* background-color: var(--active-link); */
+    background-color: var(--path-hover);
+    color: var(--newbtn-gray);
 }
 
 .sidebar > nav-item {
@@ -141,6 +175,10 @@ body{
 
 .dropdown-menu{
     width: 250px;
+}
+
+.shadow-btn {
+    box-shadow: 0 .125rem .25rem rgba(169,170,172,.9) !important;
 }
 
 
