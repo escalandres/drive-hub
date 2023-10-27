@@ -37,13 +37,13 @@ function crearEnlacesDeRuta() {
     const folders = eliminarRutaPrincipal(ruta)
     // Dividir la ruta en componentes
     const componentes = folders.split('/').filter(Boolean);
-    console.log('componentes')
-    console.log(componentes)
+    // console.log('componentes')
+    // console.log(componentes)
 
     //---------------- Crear elementos <a> para cada componente de la ruta ---------------
     for (let i = 0; i < componentes.length; i++) {
-        console.log('i', i)
-        console.log('length', componentes.length)
+        // console.log('i', i)
+        // console.log('length', componentes.length)
         // Agregar un separador ">" entre los enlaces, excepto para el último
         if (i <= componentes.length - 1 || i === 0) {
             // const separador = document.createTextNode(' > ');

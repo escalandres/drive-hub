@@ -8,6 +8,11 @@ import { dirname } from 'path';
 //My modules
 import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
 import userRoutes from './routes/user.js';
+import uploadRoutes from './routes/upload.js';
+import createRoutes from './routes/create.js';
+
+
+
 //Variables modules
 const app = express();
 // Obtiene la URL del archivo actual
@@ -78,6 +83,23 @@ app.get('/drive/mydrive/:folder(*)', (req, res) => {
     // -> 
     res.send(html);  
 });
+
+// Middleware personalizado para agregar req.session.user.id al cuerpo de la solicitud
+// app.use('/upload', (req, res, next) => {
+//     req.userId = req.session.user.id;
+//     next();
+// });
+
+  // Configura la ruta para manejar las subidas de archivos
+app.use('/upload', uploadRoutes);
+
+// app.use('/create-folder', (req, res, next) => {
+//     req.folderName = req.body.folderName;
+//     next();
+// });
+
+// Create Folder
+app.use('/create',createRoutes);
 
 app.use(handleNotFound);
 

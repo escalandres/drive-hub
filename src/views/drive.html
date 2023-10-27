@@ -17,6 +17,13 @@
     <title>Drive Hub</title>
 </head>
 <body>
+    <div id="panel" class="panel" style="display: none;"> 
+        <div class="contenedor">
+            <div class="spinner-border text-light spinne" style="width: 10rem; height: 10rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
     <div class="main-container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <!-- Contenido del navbar -->
@@ -54,7 +61,7 @@
                             <ul id="new-drop" class="dropdown-menu">
                                 <li><a class="dropdown-item center-item" href="#"><i class="new-folder icon"></i><span>New folder</span></a></li>
                                 <hr/>
-                                <li><a class="dropdown-item center-item" href="#"><i class="upload-file icon"></i><span>Upload file</span></a></li>
+                                <li><a class="dropdown-item center-item" href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"><i class="upload-file icon"></i><span>Upload file</span></a></li>
                                 <li><a class="dropdown-item center-item" href="#"><i class="upload-folder icon"></i><span>Upload folder</span></a></li>
                             </ul>
                         </div>
@@ -149,6 +156,46 @@
 
     <div id="folderInfo" style="display: none;">{folderInfo}</div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Sube tus archivos</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div id="drop-zone">
+                    Arrastra archivos aquí o haz clic para seleccionar archivos
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Carpeta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control" type="text" name="folderName" id="folderName" placeholder="Escribe el nombre de tu carpeta"/>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="createFolderBtn" type="button" class="btn btn-primary">Crear Carpeta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Librerías JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
@@ -158,5 +205,6 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
     <script type="module" src="/js/datatable.js"></script>
     <script type="module" src="/js/routes.js"></script>
+    <script type="module" src="/js/upload.js"></script>
 </body>
 </html>

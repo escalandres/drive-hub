@@ -10,16 +10,20 @@ export function hideLoading() {
     panel.style.display = "none";
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Código a ejecutar cuando el DOM ha sido cargado completamente
-    // mostrarPanel();
-    const currentYear = new Date().getFullYear();
-    document.getElementById('currentYear').textContent = currentYear;
+// document.addEventListener("DOMContentLoaded", function() {
+//     // Código a ejecutar cuando el DOM ha sido cargado completamente
+//     // mostrarPanel();
+//     const currentYear = new Date().getFullYear();
+//     document.getElementById('currentYear').textContent = currentYear;
 
-    // if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-    //     themeToggle.click();
-    // }
-});
+//     // if(window.matchMedia('(prefers-color-scheme: dark)').matches){
+//     //     themeToggle.click();
+//     // }
+// });
+
+export function reloadPage(){
+    setTimeout(location.reload(),3000);
+}
 
 export const alerta = {
     success: (message) => {
