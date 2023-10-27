@@ -160,6 +160,13 @@ function isImage(extension) {
     }
 }
 
+$('#div_visor').on('show.bs.modal', function (e) {
+  visorPDF.onload = function() {
+    // Ajusta la altura del modal al contenido del iframe
+    $('#div_visor .modal-dialog').css('max-height', iframe.contentWindow.document.body.scrollHeight + 'px');
+  };
+});
+
 $('#div_visor').on('hidden.bs.modal', function (event) {
     visorPDF.src = "";
     // visorPDF.style.width = '600px'; // Nuevo ancho
