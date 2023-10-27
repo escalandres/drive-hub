@@ -188,7 +188,13 @@ body{
 
 
 @media (1280px <= width <= 1600px){ 
-    @media (height < 800px){ 
+    @media (height < 600px){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 68vh;
+        }
+    }
+    @media ( 600px <= height < 800px){ 
         /* Laptops con resolución HD */
         .table-scroll {
             max-height: 73vh;
