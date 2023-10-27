@@ -122,6 +122,19 @@ body{
     background: var(--light-blue);
 }
 
+.icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 0.6em;
+}
+
+.center-item{
+    color: var(--scrollbar-hover);
+    display: flex;
+    align-items: center;
+}
+
 
 /* VisorPDF */
 /* iframe > img{
