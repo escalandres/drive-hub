@@ -72,3 +72,5 @@ function crearEnlacesDeRuta() {
 
     // Llamar a la función para crear los enlaces de la ruta
     crearEnlacesDeRuta();
+// alert(`Ancho: ${window.innerWidth}`)
+// alert(`Alto: ${window.innerHeight}`)

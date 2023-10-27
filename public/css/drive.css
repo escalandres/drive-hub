@@ -5,6 +5,12 @@
     --light-blue: rgb(194,231,255);
     --scrollbar-color: rgb(199,199,199);
     --scrollbar-hover: rgb(116,119,117);
+    --newbtn-gray: rgb(68,71,70);
+}
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 body{
     background: var(--sidebar-grey);
@@ -16,7 +22,7 @@ body{
 .main-container{
     display: flex;
     flex-direction: column;
-    height: 97vh;
+    height: 100vh;
 }
 
 .side-table-container{
@@ -61,8 +67,6 @@ body{
 
 .s-icon {
     position: absolute;
-    /* left: 11px;  */
-    /* top: 11px;  */
     top: 30%;
     left: 2%;
     color: grey;
@@ -130,9 +134,13 @@ body{
 }
 
 .center-item{
-    color: var(--scrollbar-hover);
+    color: var(--newbtn-gray);
     display: flex;
     align-items: center;
+}
+
+.dropdown-menu{
+    width: 250px;
 }
 
 
@@ -146,8 +154,8 @@ body{
     width: 7px;
     
 }
-  
-  ::-webkit-scrollbar-thumb {
+
+::-webkit-scrollbar-thumb {
     background: var(--scrollbar-color); /* Color del "pulgares" (la parte que puedes arrastrar) */
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -155,17 +163,81 @@ body{
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
 }
-  
-  ::-webkit-scrollbar-thumb:hover {
+
+::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-hover); /* Color del "pulgares" en el estado de "hover" */
-  }
-  
-  ::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-track {
     background: #fff; /* Color de fondo de la barra de desplazamiento */
-  }
-  
-  /* Ocultar las flechas de la barra de desplazamiento */
-  ::-webkit-scrollbar-button {
+}
+
+/* Ocultar las flechas de la barra de desplazamiento */
+::-webkit-scrollbar-button {
     display: none;
-  }
-  
+}
+
+
+/* ----------------------- Media Query ------------------------- */
+
+
+
+
+
+
+
+
+@media (1280px <= width <= 1600px){ 
+    @media (height < 800px){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 73vh;
+        }
+    }
+    @media (800px <= height){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 78vh;
+        }
+    }
+}
+@media (1600px < width < 1920px){ 
+    @media (height < 800px){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 73vh;
+        }
+    }
+    @media (800px <= height){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 80vh;
+        }
+    }
+    @media (1000px <= height){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 83vh;
+        }
+    }
+}
+@media (1920px <= width ){ 
+    @media (height < 800px){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 78vh;
+        }
+    }
+    @media (800px <= height){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 80vh;
+        }
+    }
+    @media (1000px <= height){ 
+        /* Laptops con resolución HD */
+        .table-scroll {
+            max-height: 84vh;
+        }
+    }
+}
