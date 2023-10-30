@@ -163,7 +163,7 @@ function isImage(extension) {
 $('#div_visor').on('show.bs.modal', function (e) {
   visorPDF.onload = function() {
     // Ajusta la altura del modal al contenido del iframe
-    $('#div_visor .modal-dialog').css('max-height', iframe.contentWindow.document.body.scrollHeight + 'px');
+    $('#div_visor .modal-dialog').css('max-height', visorPDF.contentWindow.document.body.scrollHeight + 'px');
   };
 });
 

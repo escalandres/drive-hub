@@ -66,6 +66,7 @@ body{
 #div_visor{
     border: none;
     border-color: none;
+    padding: 10% 10%;
 }
 
 .iframe-container{
