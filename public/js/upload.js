@@ -43,13 +43,11 @@ async function uploadFiles(files){
     console.log(formData)
     const response = await fetch('/upload/file', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: formData
     });
-    const data = await response.json();
+
+
     hideLoading();
-    if (response.status){ alerta.success("Los archivos se subieron correctamente"); reloadPage();}
+    if (response.ok){ alerta.success("Los archivos se subieron correctamente"); reloadPage();}
     else alerta.error("Ocurrió un error al subir los archivos");
 }

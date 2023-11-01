@@ -1,10 +1,18 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs'; // Importa el módulo fs
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 // Set up storage for uploaded files
 
+const currentFileURL = import.meta.url;
+// Convierte la URL del archivo en una ruta de sistema de archivos
+const currentFilePath = fileURLToPath(currentFileURL);
+// Obtiene el directorio del archivo actual
+const __dirname = dirname(currentFilePath);
 
 const storage = multer.diskStorage({
+    
     destination: async (req, file, cb) => {
         // const subfolder = req.userId; // Obtener el valor del campo 'id' del JSON
         const subfolder = 'alguien';
@@ -12,6 +20,7 @@ const storage = multer.diskStorage({
         console.log('destPath',destPath)
         const destinationPath = path.join(__dirname, '../', 'drive', subfolder,destPath);
         console.log('destination', destinationPath);
+        console.log(file)
         fs.promises.mkdir(destinationPath, { recursive: true }, (err) => {
             if (err) {
             console.error('Error al crear la carpeta:', err);
@@ -19,9 +28,15 @@ const storage = multer.diskStorage({
             }
             cb(null, destinationPath);
         });
+        console.log('achu')
     },
     filename: async (req, file, cb) => {
+        console.log('a')
+        console.log(file)
         const originalName = file.originalname;
+        console.log(originalName)
+        const subfolder = 'alguien';
+        const destPath = req.body.destPath;
         const destinationPath = path.join(__dirname,'../', 'drive', subfolder, destPath);
 
         let newFilename = originalName;

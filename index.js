@@ -90,6 +90,11 @@ app.get('/drive/mydrive/:folder(*)', (req, res) => {
 //     next();
 // });
 
+// app.post('/upload/file1', (req,res,next)=>{
+//     console.log('archivos')
+//     console.log(req)
+// })
+
   // Configura la ruta para manejar las subidas de archivos
 app.use('/upload', uploadRoutes);
 
