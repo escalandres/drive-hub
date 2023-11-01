@@ -12,6 +12,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!-- Estilos de DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/datatable.css">
     <link rel="stylesheet" href="/css/drive.css">
     <link rel="stylesheet" href="/css/routes.css">
@@ -21,7 +22,7 @@
 </head>
 <body>
     <div id="panel" class="panel" style="display: none;"> 
-        <div class="contenedor">
+        <div class="panel-container">
             <div class="spinner-border text-light spinne" style="width: 10rem; height: 10rem;" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
@@ -62,10 +63,10 @@
                                 <i class="fa-solid fa-plus me-3"></i>New
                             </button>
                             <ul id="new-drop" class="dropdown-menu">
-                                <li><a class="dropdown-item center-item" href="#"><i class="new-folder icon"></i><span>New folder</span></a></li>
+                                <li><a class="dropdown-item center-item" data-bs-toggle="modal" data-bs-target="#createModal"><i class="new-folder icon"></i><span>New folder</span></a></li>
                                 <hr/>
-                                <li><a class="dropdown-item center-item" href="#" data-bs-toggle="modal" data-bs-target="#uploadModal"><i class="upload-file icon"></i><span>Upload file</span></a></li>
-                                <li><a class="dropdown-item center-item" href="#"><i class="upload-folder icon"></i><span>Upload folder</span></a></li>
+                                <li><a class="dropdown-item center-item" data-bs-toggle="modal" data-bs-target="#uploadModal"><i class="upload-file icon"></i><span>Upload file</span></a></li>
+                                <li><a class="dropdown-item center-item"><i class="upload-folder icon"></i><span>Upload folder</span></a></li>
                             </ul>
                         </div>
                         <!-- <hr> -->
@@ -192,7 +193,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="createFolderBtn" type="button" class="btn btn-primary">Crear Carpeta</button>
+                <button id="createFolderBtn" type="button" class="btn btn-primary" >Crear Carpeta</button>
                 </div>
             </div>
         </div>

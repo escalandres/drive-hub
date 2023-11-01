@@ -40,9 +40,3 @@ export function convertFileDate(fechaEnFormatoPersonalizado) {
         return `${dia} ${mes} ${año}`;
     }
 }
-
-// module.exports = {
-//     convertFileSize,
-//     convertFileDate
-// };
-

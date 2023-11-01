@@ -6,9 +6,6 @@
     height: 20px;
     margin-right: 0.5rem;
 }
-.android-icon {
-    background-image: url('/icons/android.svg');
-}
 .apk-icon {
     background-image: url('/icons/apk.svg');
 }
@@ -31,7 +28,7 @@
     background-image: url('/icons/excel.svg');
 }
 .exe-icon {
-    background-image: url('/icons/exe.svg');
+    background-image: url('/icons/terminal.svg');
 }
 .font-icon {
     background-image: url('/icons/font.svg');
@@ -40,7 +37,7 @@
     background-image: url('/icons/folder.svg');
 }
 .gif-icon {
-    background-image: url('/icons/gif2.svg');
+    background-image: url('/icons/gif.svg');
 }
 .html-icon {
     background-image: url('/icons/html.svg');
@@ -55,7 +52,7 @@
     background-image: url('/icons/music.svg');
 }
 .pdf-icon {
-    background-image: url('/icons/pdf-light.svg');
+    background-image: url('/icons/pdf.svg');
 }
 .ppt-icon {
     background-image: url('/icons/ppt.svg');

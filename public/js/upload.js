@@ -31,7 +31,6 @@ dropZone.addEventListener('click', () => {
 });
 
 async function uploadFiles(files){
-    alert('t')
     showLoading();
     let path = new URL(window.location.href);
     let destPath = path.pathname.replace(/^\/drive\/mydrive\//, '');
@@ -51,3 +50,29 @@ async function uploadFiles(files){
     if (response.ok){ alerta.success("Los archivos se subieron correctamente"); reloadPage();}
     else alerta.error("Ocurrió un error al subir los archivos");
 }
+
+$("#createFolderBtn").on('click', async function(event){
+    showLoading();
+    let path = new URL(window.location.href);
+    let destPath = path.pathname.replace(/^\/drive\/mydrive\//, '');
+    alert(destPath)
+    console.log()
+    const response = await fetch('/create/folder', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            folderName: document.getElementById("folderName").value,
+            destPath: destPath
+        })
+    });
+    hideLoading();
+    document.getElementById("folderName").value = "";
+    if(!response.ok) alerta.error("No se pudo crear la carpeta");
+    else reloadPage()
+})
+
+$('#createModal').on('hidden.bs.modal', function (event) {
+    document.getElementById("folderName").value = "";
+});
