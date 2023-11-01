@@ -55,7 +55,6 @@ $("#createFolderBtn").on('click', async function(event){
     showLoading();
     let path = new URL(window.location.href);
     let destPath = path.pathname.replace(/^\/drive\/mydrive\//, '');
-    alert(destPath)
     console.log()
     const response = await fetch('/create/folder', {
         method: 'POST',

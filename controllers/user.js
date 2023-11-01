@@ -3,8 +3,7 @@ import bcrypt from 'bcrypt';
 
 export async function login(req, res){
     try {
-        const email = req.body.email;
-        const password = req.body.password;
+        const { email, password } = req.body;
         const result = await getUser(email)
 
         if(!result.success){
@@ -24,15 +23,10 @@ export async function login(req, res){
 
 export async function signup(req,res){
     try {
-        const email = req.body.email;
-        const password = req.body.password;
-        const name = req.body.name;
+        const { email, password, name } = req.body;
         const userID = crypto.randomBytes(16).toString('hex');
         const hashedPassword = await bcrypt.hash(password, 10);
         console.log(email, password, name, userID);
-        // const response = await User.create({
-        //     userId, email, name, hashedPassword
-        // })1
         const response = await registerNewUser({id: userID, email: email, name: name, password: hashedPassword})
         console.log('response',response)
         if(!response.success){

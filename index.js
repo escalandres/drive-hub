@@ -46,10 +46,16 @@ const handleNotFound = (req, res, next) => {
 
 // Aplicar los middlewares en orden
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(authenticationMiddleware);
+app.use(authenticationMiddleware);
 
 app.get('/', (req, res) => {
-    return res.send('Bienvenido')
+    if (!req.session.user) {
+        // Redirigir solo si el usuario no está autenticado
+        return res.redirect('/login');
+    }
+
+    // Si hay una sesión de usuario iniciada, redirige a la ruta /ftp/:userId
+    res.redirect(`/drive/mydrive`);
 });
 
 app.get('/login', (req,res)=>{
@@ -62,7 +68,7 @@ app.use('/user', userRoutes);
 app.use('/drive/mydrive/:folder?', (req,res,next) =>{
     const folder = req.params.folder ?? '';
     // console.log(folder)
-    const fullPath = path.join(__dirname, 'drive','alguien',folder);
+    const fullPath = path.join(__dirname, 'drive',req.session.user.id,folder);
     express.static(fullPath)(req, res, next);
 });
 

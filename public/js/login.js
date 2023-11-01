@@ -23,29 +23,30 @@ function matchPassword() {
   }  
 }  
 
-const form = document.getElementById('signup-form');
+const register = document.getElementById('signup-form');
+const login = document.getElementById('signin-form');
 
-form.addEventListener('submit', async (event) => {
+login.addEventListener('submit', async (event) => {
     event.preventDefault();
     matchPassword()
-    //showLoading();
-    // const response = await fetch('/login', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //         email: form.elements.email.value,
-    //         password: form.elements.password.value
-    //     })
-    // });
-    // hideLoading();
-    // const data = await response.json();
-    // if (!data.success) {
-    //     // Mostrar un mensaje de error si el inicio de sesión falla
-    //     // alert(data.message);
-    //     SendAlert("El usuario y/o contraseña no es válido","error")
-    // }else{
-    //     window.location.href = '/user'
-    // }
+    showLoading();
+    const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: form.elements.email.value,
+            password: form.elements.password.value
+        })
+    });
+    hideLoading();
+    const data = await response.json();
+    if (!data.success) {
+        // Mostrar un mensaje de error si el inicio de sesión falla
+        // alert(data.message);
+        SendAlert("El usuario y/o contraseña no es válido","error")
+    }else{
+        window.location.href = '/user'
+    }
 });
