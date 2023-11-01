@@ -1,0 +1,223 @@
+clear all
+close all
+clc
+
+%% PARTE 1
+% DEMOSTRAR QUE HAY PARES DE CODIGOS WALSH QUE AL DESFASARSE, PIERDEN 
+% ORTOGONALIDAD (ES DECIR, QUE EL RESULTADO DE LA CORRELACIÓN SEA DIFERENTE DE CERO)
+
+N=16; %Longitud de los codigos Walsh
+Nomuestras=80; %Numero de muestras por cada chip de los pares de codigos walsh elegidos
+
+if(N==1)
+    WALSH=[0];
+elseif(N==2)
+    WALSH=[0 0 ; 0 1];
+else
+    TEMP=[0 0 ; 0 1];
+    WALSH=[];
+    final=log2(N);
+    for i=1:final-1
+        WALSH=[TEMP TEMP ; TEMP not(TEMP)];
+        TEMP=WALSH;
+    end
+end
+
+F=['Todos los codigos Walsh disponibles cuya longitud es de ',num2str(N),' chips'];
+disp(F)
+disp(WALSH)
+
+
+resultados=[];
+
+disp(['Obteniendo parejas de codigos que cuando se desfasa un codigo ya no hay ' ...
+    'ortogonalidad entre ellos']);
+
+for i=1:1:N
+    codigo1=WALSH(i,:);
+    for j=1:1:N
+        codigo2=WALSH(j,:);
+
+        signal1=[];
+        signal2=[];
+        
+        for n=1:1:length(codigo1)
+            if codigo1(n)==1;
+               se=repelem(-1,Nomuestras);
+            else codigo1(n)==0;
+                se=repelem(1,Nomuestras);
+            end
+             signal1=[signal1 se];
+        end
+        
+        for n=1:1:length(codigo2)
+            if codigo2(n)==1;
+               se=repelem(-1,Nomuestras);
+            else codigo2(n)==0;
+                se=repelem(1,Nomuestras);
+            end
+             signal2=[signal2 se];
+        end
+
+        for desfase=1:45:N*Nomuestras-1 % desfase=1:1:N*Nomuestras-1
+            signal2desf = circshift(signal2,desfase);
+            rdesfasada=ifft(fft(signal1) .* conj(fft(signal2desf)));
+            resultadoCorrelacion=sum(rdesfasada);
+            if (resultadoCorrelacion~=0) && (i~=j);
+               resultados=[resultados ; i j desfase];
+               % NOTA: COLUMNA1=CODIGO1 | COLUMNA2=CODIGO2 CON DESFASAMIENTO | COLUMNA3=DESFASAMIENTO DEL CODIGO2
+            end
+        end
+    end
+    disp('Calculando, espere por favor...');
+end
+
+C = unique(resultados(:,1:2),'rows');
+fprintf('\n');
+F=['Parejas de codigos de ',num2str(N), ' chips encontradas que al desfasarse pierden ortogonalidad'];
+disp(F)
+fprintf('Codigo 1 | Codigo 2 desfasado\n');
+disp(C)
+
+codigo1=WALSH(4,:);
+codigo2=WALSH(3,:);
+desfase=90;
+
+disp('Codigo 1 escogido')
+disp(codigo1)
+
+disp('Codigo 2 escogido')
+disp(codigo2)
+
+signal1=[];
+signal2=[];
+
+for n=1:1:length(codigo1)
+    if codigo1(n)==1;
+       se=repelem(-1,Nomuestras);
+    else codigo1(n)==0;
+        se=repelem(1,Nomuestras);
+    end
+     signal1=[signal1 se];
+end
+
+for n=1:1:length(codigo2)
+    if codigo2(n)==1;
+       se=repelem(-1,Nomuestras);
+    else codigo2(n)==0;
+        se=repelem(1,Nomuestras);
+    end
+     signal2=[signal2 se];
+end
+
+x=[0:1:N*Nomuestras-1];
+
+figure(1)
+subplot(3,2,1) % Aqui son 3 filas, 2 columna. Insertamos la grafica en la posicion 1
+plot(x,signal1,'b','linewidth',2)
+F=['Codigo 1 convertido en señal (',num2str(Nomuestras),' muestras por chip)'];
+title(F) %Ponemos titulo a la grafica
+yline(0)
+grid on
+
+subplot(3,2,3) % Aqui son 3 filas, 2 columna. Insertamos la grafica en la posicion 3
+plot(x,signal2,'r','linewidth',2)
+F=['Codigo 2 convertido en señal (',num2str(Nomuestras),' muestras por chip)'];
+title(F) %Ponemos titulo a la grafica
+yline(0)
+grid on
+
+subplot(3,2,5) % Aqui son 3 filas, 2 columna. Insertamos la grafica en la posicion 5
+r=ifft(fft(signal1) .* conj(fft(signal2)));
+r_normalizada=r/max(abs(r));
+if (sum(r)==0)
+    plot(r,'m','linewidth',2)
+else
+    plot(r_normalizada,'m','linewidth',2)
+end
+title('Correlacion circular del codigo 1 y codigo 2 convertidos en señales') %Ponemos titulo a la grafica
+yline(0)
+grid on
+
+disp('Resultado correlacion circular SIN desfase')
+disp(sum(r))
+
+subplot(3,2,2) % Aqui son 3 filas, 2 columna. Insertamos la grafica en la posicion 2
+plot(x,signal1,'b','linewidth',2)
+F=['Codigo 1 convertido en señal (',num2str(Nomuestras),' muestras por chip)'];
+title(F) %Ponemos titulo a la grafica
+yline(0)
+grid on
+
+subplot(3,2,4) % Aqui son 3 filas, 2 columna. Insertamos la grafica en la posicion 4
+signal2desf = circshift(signal2,desfase);
+plot(x,signal2desf,'r','linewidth',2)
+F=['Codigo 2 convertido en señal con desfasamiento (',num2str(Nomuestras),' muestras por chip)'];
+title(F) %Ponemos titulo a la grafica
+yline(0)
+grid on
+
+subplot(3,2,6) % Aqui son 3 filas, 2 columna. Insertamos la grafica en la posicion 6
+rdesfasada=ifft(fft(signal1) .* conj(fft(signal2desf)));
+r_desf_normalizada=rdesfasada/max(abs(rdesfasada)); 
+if (sum(rdesfasada)==0)
+    plot(rdesfasada,'m','linewidth',2)
+else
+    plot(r_desf_normalizada,'m','linewidth',2)
+end
+title('Correlacion circular del codigo 1 y codigo 2 (desfasado) convertidos en señales') %Ponemos titulo a la grafica
+yline(0)
+grid on
+
+disp('Resultado correlacion circular CON desfase (el codigo 2 es el que esta desfasado)')
+disp(sum(rdesfasada))
+
+%% PARTE 2
+% REGISTROS DE CORRIMIENTO
+% Nos va a servir para generar secuencias de PN (pseudo ruido en español)
+
+registros=[1 0 0 1 1];
+temporal=registros;
+n=5;
+secuenciaPN=[];
+
+for n=1:1:((2^5)-1)*2
+    secuenciaPN=[secuenciaPN registros(1,5)];
+    registros(1,1)=mod(temporal(1,2)+temporal(1,5),2);
+    registros(1,2)=temporal(1,1);
+    registros(1,3)=temporal(1,2);
+    registros(1,4)=temporal(1,3);
+    registros(1,5)=temporal(1,4);
+    temporal=registros;
+end
+
+disp('Secuencia de pseudo ruido')
+disp(secuenciaPN)
+
+signalPN=[];
+
+for n=1:1:length(secuenciaPN)
+    if secuenciaPN(n)==1;
+       se=repelem(-1,Nomuestras);
+    else secuenciaPN(n)==0;
+        se=repelem(1,Nomuestras);
+    end
+     signalPN=[signalPN se];
+end
+
+figure(2)
+subplot(2,1,1) % Aqui son 2 filas, 1 columna. Insertamos la grafica en la posicion 1
+plot(signalPN,'b','linewidth',2)
+F=['Secuencia de pseudo ruido usando ',num2str(Nomuestras),' muestras por cada bit'];
+title(F) %Ponemos titulo a la grafica
+yline(0)
+grid on
+
+subplot(2,1,2) % Aqui son 2 filas, 1 columna. Insertamos la grafica en la posicion 2
+r=ifft(fft(signalPN) .* conj(fft(signalPN)));
+r_normalizada=r/max(abs(r)); 
+plot(r_normalizada,'r','linewidth',2)
+title('Autocorrelacion circular de la secuencia de pseudo ruido') %Ponemos titulo a la grafica
+yline(0)
+grid on
+

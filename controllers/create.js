@@ -2,15 +2,11 @@ import path from 'path';
 import fs from 'fs';
 
 export async function createFolder (req, res) {
-  const subfolder = req.session.user.id; // Obtener el valor del campo 'id' del usuario
-//   const userId = req.userId
-  console.log('subfolder',subfolder)
-//   console.log('userId',userId)
-  const destinationPath = path.join(__dirname, '../../', 'ftp', subfolder);
-
-  const folderName = req.body.folderName;
+  // const userFolder = req.session.user.id;
+  const userFolder = 'alguien';
+  const { folderName, destPath } = req.body;
   console.log(req.body)
-  const newFolderPath = path.join(destinationPath, folderName);
+  const newFolderPath  = path.join(__dirname, '../', 'drive', destPath, folderName);
 
   try {
     if (await folderExists(newFolderPath)) {

@@ -33,6 +33,9 @@
 .exe-icon {
     background-image: url('/icons/exe.svg');
 }
+.font-icon {
+    background-image: url('/icons/font.svg');
+}
 .folder-icon {
     background-image: url('/icons/folder.svg');
 }

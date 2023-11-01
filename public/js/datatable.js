@@ -190,7 +190,7 @@ function buscarIcono(fileExtension){
 function agregarIcono(){
     // var miTabla = $('#fileTable').DataTable();
     table.rows().every(function() {
-        var iconClass = buscarIcono(this.data().Extension); // Encuentra la clase de icono según el valor de la columna "Extension"
+        var iconClass = buscarIcono(this.data().Extension.toLowerCase()); // Encuentra la clase de icono según el valor de la columna "Extension"
         var iconElement = `<i class="i-icon ${iconClass}"></i> `; // Elemento <i> con la clase de icono
     
         // Agrega el elemento <i> antes del texto en la primera celda de la fila actual

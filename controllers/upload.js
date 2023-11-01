@@ -21,7 +21,7 @@ const storage = multer.diskStorage({
         const destinationPath = path.join(__dirname, '../', 'drive', subfolder,destPath);
         console.log('destination', destinationPath);
         console.log(file)
-        fs.promises.mkdir(destinationPath, { recursive: true }, (err) => {
+        fs.mkdir(destinationPath, { recursive: true }, (err) => {
             if (err) {
             console.error('Error al crear la carpeta:', err);
             return cb(err, null);
@@ -32,7 +32,6 @@ const storage = multer.diskStorage({
     },
     filename: async (req, file, cb) => {
         console.log('a')
-        console.log(file)
         const originalName = file.originalname;
         console.log(originalName)
         const subfolder = 'alguien';

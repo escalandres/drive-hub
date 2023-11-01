@@ -28,7 +28,7 @@ app.use(express.urlencoded({extended: false}));
 
 //Middlewares
 const authenticationMiddleware = (req, res, next) => {
-    if (req.url.startsWith("/mydrive")) {
+    if (req.url.startsWith("/drive/mydrive")) {
       // Verificar si el usuario no está autenticado
     if (!req.session || !req.session.user) {
         //console.log('Usuario no autenticado. Redirigiendo a /login');
