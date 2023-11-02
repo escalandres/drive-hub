@@ -17,7 +17,6 @@ signInButton.addEventListener('click', () => {
 function matchPassword() {  
   var pw1 = document.getElementById("pswd1").value;  
   var pw2 = document.getElementById("pswd2").value;  
-  console.log(pw1, pw2)
   if(pw1 !== pw2)  
   {   
     alerta.error("Passwords did not match");  
@@ -70,8 +69,6 @@ register.addEventListener('submit', async (event) => {
     });
     hideLoading();
     if (!response.ok) {
-        // Mostrar un mensaje de error si el inicio de sesión falla
-        // alert(data.message);
         alerta.error("Ocurrió un error al registrar su usuario. Inténtelo nuevamente")
     }else{
         window.location.href = '/drive/mydrive'
