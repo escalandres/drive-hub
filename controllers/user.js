@@ -27,7 +27,7 @@ export async function login(req, res){
         req.session.user = { id: result.user.id, email: result.user.email };
         return res.status(200).json({ success: true });
     } catch (error) {
-        console.error(error);
+        console.error('Ocurrio un error:',error);
         // Enviar respuesta JSON indicando fallo
         res.status(401).json({ success: false });
     }
@@ -47,7 +47,7 @@ export async function signup(req,res){
         req.session.user = {id: userID, email: email}
         res.status(200).json({success: true})
     } catch (error) {
-        console.error(error);
+        console.error('Ocurrio un error:',error);
         // Enviar respuesta JSON indicando fallo
         res.status(401).json({ success: false });
     }

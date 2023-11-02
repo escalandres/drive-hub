@@ -43,8 +43,6 @@ login.addEventListener('submit', async (event) => {
   });
   hideLoading();
   if (!response.ok) {
-      // Mostrar un mensaje de error si el inicio de sesión falla
-      // alert(data.message);
       alerta.error("El usuario y/o contraseña no es válido")
   }else{
       window.location.href = '/drive/mydrive'

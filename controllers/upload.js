@@ -15,12 +15,9 @@ const storage = multer.diskStorage({
     
     destination: async (req, file, cb) => {
         // const userFolder = req.userId; // Obtener el valor del campo 'id' del JSON
-        const userFolder = 'alguien';
+        const userFolder = req.session.user?.id;
         const destPath = req.body.destPath;
-        console.log('destPath',destPath)
         const destinationPath = path.join(__dirname, '../', 'drive', userFolder,destPath);
-        console.log('destination', destinationPath);
-        console.log(file)
         fs.mkdir(destinationPath, { recursive: true }, (err) => {
             if (err) {
             console.error('Error al crear la carpeta:', err);
@@ -28,12 +25,9 @@ const storage = multer.diskStorage({
             }
             cb(null, destinationPath);
         });
-        console.log('achu')
     },
     filename: async (req, file, cb) => {
-        console.log('a')
         const originalName = file.originalname;
-        console.log(originalName)
         const userFolder = 'alguien';
         const destPath = req.body.destPath;
         const destinationPath = path.join(__dirname,'../', 'drive', userFolder, destPath);
