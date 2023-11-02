@@ -4,6 +4,7 @@ import path from 'path';
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import session from 'express-session';
 
 //My modules
 import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
@@ -25,6 +26,21 @@ const __dirname = dirname(currentFilePath);
 //settings
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+// Configuración de express-session
+app.use(session({
+    secret: process.env.KEY, // Cambia esto a una clave secreta fuerte en producción
+    resave: false,
+    saveUninitialized: false,
+    // cookie: {
+    //     maxAge: 1000 * 60 * 15, // 15 minutos (en milisegundos)
+    //     secure: false,             // Solo se envía la cookie en conexiones seguras (HTTPS)
+    //     httpOnly: true,           // La cookie solo es accesible por el servidor (no por JavaScript en el navegador)
+    //     sameSite: 'strict',       // Controla cómo se envía la cookie en las solicitudes del mismo sitio
+    //     path: '/',                // Ruta base donde se aplica la cookie
+    //     domain: 'localhost:3001',    // Dominio para el que se aplicará la cookie
+    // },
+}));
 
 //Middlewares
 const authenticationMiddleware = (req, res, next) => {
@@ -74,7 +90,7 @@ app.use('/drive/mydrive/:folder?', (req,res,next) =>{
 
 app.get('/drive/mydrive/:folder(*)', (req, res) => {
     // console.log('a')
-    const userID = 'alguien';
+    const userID = req.session.user?.id;
     // console.log(req.params.folder)
     const folder = req.params.folder ?? ''; // Obtener el valor del parámetro opcional
     var folderInfo = serveFiles(userID,folder);
