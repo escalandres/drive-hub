@@ -212,11 +212,17 @@ body{
     color: #0B85FF!important;
     margin: 0 0 0.5em 0!important;
 }
-.dd-content p{
+.dd-content span{
     font-size: 1.2em;
     font-weight: 500;
     margin: 0;
     color: #34495e;
+}
+.dd-content p{
+    font-size: 0.9em;
+    font-weight: 400;
+    margin: 0.7em;
+    color: #ccc;
 }
 .false-link{
     color: #0B85FF !important;
