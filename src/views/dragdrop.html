@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <title>Document</title>
+    <style>
+        .content{
+            width: 300px;
+            height: 300px;
+            border: dashed 2px #ccc;
+            display: flex;
+            flex-direction: column; /* Cambiamos la dirección a columna */
+            align-items: center;
+            justify-content: center; /* Centramos verticalmente */
+            text-align: center; /* Centramos horizontalmente */
+        }
+        .content i{
+            font-size: 50px;
+            color: #0B85FF;
+            margin: 0 0 0.5em 0;
+        }
+        .content p{
+            font-size: 1.2em;
+            font-weight: 500;
+            margin: 0;
+            color: #34495e;
+        }
+        .false-link{
+            color: #0B85FF !important;
+            cursor: pointer;
+        }
+        .false-link:hover{
+            text-decoration: underline;
+        }
+        .dragover{
+            border: dashed 2px #0B85FF;
+            background: rgba(114, 194, 255, 0.493);
+        }
+    </style>
+</head>
+<body>
+    <div id="drop-zone" class="content">
+        <!-- <i class="fas fa-cloud-upload"></i> -->
+        <i class="fa-solid fa-images"></i>
+        <p>Drag & Drop</p>
+        <p class="false-link">or browse</p>
+    </div>
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        dropZone.addEventListener('click', () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.multiple = true;
+            fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+                uploadFiles(files);
+            });
+            fileInput.click();
+        });
+    </script>
+</body>
+</html>

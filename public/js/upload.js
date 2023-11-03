@@ -4,19 +4,18 @@ const dropZone = document.getElementById('drop-zone');
 
 dropZone.addEventListener('dragover', (e) => {
     e.preventDefault();
-    dropZone.style.border = '2px dashed #666';
+    dropZone.classList.add('dragover');
 });
 
 dropZone.addEventListener('dragleave', (e) => {
     e.preventDefault();
-    dropZone.style.border = '2px dashed #ccc';
+    dropZone.classList.remove('dragover');
 });
 
 dropZone.addEventListener('drop', (e) => {
     e.preventDefault();
-    dropZone.style.border = '2px dashed #ccc';
     const files = e.dataTransfer.files;
-    handleFiles(files);
+    uploadFiles(files);
 });
 
 dropZone.addEventListener('click', () => {
