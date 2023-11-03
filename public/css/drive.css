@@ -114,7 +114,7 @@ body{
 
 .s-icon {
     position: absolute;
-    top: 30%;
+    top: 26%;
     left: 2%;
     color: grey;
 }
@@ -128,7 +128,7 @@ body{
 }
 
 .icon-input {
-    padding-left: 40px !important; /* Espacio para el icono */
+    padding-left: 3.5em !important; /* Espacio para el icono */
 }
 
 /* ------------------------- Sidebar section ------------------------------- */
