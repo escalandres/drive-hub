@@ -63,3 +63,67 @@ export async function logout(req,res){
         return res.status(200).json({success: true})
     });
 }
+
+export async function changePassword(req,res){
+    try {
+        const { password, email } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const response = await db.changePassword(email, hashedPassword)
+
+        if (!response.success) {
+            return res.status(401).json({ success: false, message: "No se pudo actualizar la contraseña" })
+        }
+        return res.status(200).json({ success: true })
+    } catch (error) {
+        console.error(error);
+        // Enviar respuesta JSON indicando fallo
+        res.status(401).json({ success: false });
+    }
+}
+
+export async function generateOTP(req,res){
+    try {
+        const email = req.body.email;
+    
+        const response = await db.registrarOTP(email)
+        if (!response.success) {
+            return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
+        }
+
+        const respuesta = await bot.enviarOTP(response.result, email)
+        if (!respuesta.success) {
+            return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
+        }
+
+        return res.status(200).json({ success: true })
+    } catch (error) {
+        console.error(error);
+      // Enviar respuesta JSON indicando fallo
+        res.status(401).json({ success: false });
+    }
+}
+
+export async function checkOTP(req,res){
+    try {
+        const { otp, email } = req.body;
+        const response = await db.getOTP(email)
+        if (!response.success) {
+            return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
+        }
+
+        if (!Date.now() < response.timestamp) {
+            console.log('Es mayor')
+            return res.status(401).json({ success: false, message: "El código de seguridad ha expirado. Inténtelo nuevamente" })
+        }
+
+        if (otp !== response.result.otp.toString()) {
+            return res.status(401).json({ success: false, message: "El código de seguridad ingresado es incorrecto" })
+        }
+
+        return res.status(200).json({ success: true })
+    } catch (error) {
+        console.error(error);
+        // Enviar respuesta JSON indicando fallo
+        res.status(401).json({ success: false });
+    }
+}

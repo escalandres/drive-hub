@@ -64,6 +64,57 @@ export async function registerNewUser(user) {
   }
 }
 
+async function registrarOTP(email) {
+  try {
+    const otp = generarOTP();
+    const timeStamp = generarTimestamp();
+    const client = await connect()
+    const dbResult = await client.collection("otp").insertOne({otp: otp,email:email, timestamp: timeStamp});
+
+    if (dbResult.acknowledged) {
+      return { success: true, result: otp, error: "" };
+    } else {
+      return { success: false, result: "", error: "No se pudo crear el usuario" }
+    }
+  } catch (error) {
+    console.error('Ocurrio un error:', error);
+    return { success: false, user: {}, error: error }
+  } finally {
+    disconnect();
+  }
+}
+
+async function getOTP(email) {
+  console.log('getOTP')
+  try {
+    let otp = ""
+    const client = await connect()
+    const dbResult = await client.collection("otp")
+    .find({ email: email })
+    .sort({ "timestamp": -1 })
+    .limit(1)
+    .toArray();
+
+    if (dbResult.length > 0) {
+      console.log('Documento más reciente:', dbResult[0]);
+      otp = dbResult[0];
+    } else {
+      console.log('La colección está vacía.');
+    }
+    console.log(dbResult)
+    if (otp !== "") {      
+      return { success: true, result: otp, error: "" };
+    } else {
+      return { success: false, result: {}, error: "Categoria no encontrado" }
+    }
+  } catch (error) {
+    console.error('Ocurrio un error:', error);
+    return { success: false, user: {}, error: error }
+  } finally {
+    disconnect();
+  }
+}
+
 export async function changePassword(email,password) {
   try {
     const client = await connect()
@@ -82,4 +133,19 @@ export async function changePassword(email,password) {
   } finally {
     disconnect();
   }
+}
+
+// Funciones auxiliares
+
+function generarOTP() {
+  const min = 1000; // El número mínimo de 4 dígitos (inclusive)
+  const max = 9999; // El número máximo de 4 dígitos (inclusive)
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generarTimestamp() {
+  const duracionEnMilisegundos = 300000; // 5 minutos en milisegundos
+  const ahora = Date.now(); // Obtiene la marca de tiempo actual.
+  const timestampConDuracion = ahora + duracionEnMilisegundos;
+  return timestampConDuracion;
 }
