@@ -78,6 +78,15 @@ app.get('/login', (req,res)=>{
     return res.sendFile(path.join(__dirname,'src','views','login.html'))
 })
 
+app.get('/recover',(req,res)=>{
+    return res.sendFile(path.join(__dirname,'src','views','recover.html'));
+})
+
+
+app.get('/check-otp',(req,res)=>{
+    return res.sendFile(path.join(__dirname,'src','views','otp.html'));
+})
+
 app.use('/user', userRoutes);
 
 // Aplicar los middlewares en orden
@@ -127,6 +136,9 @@ app.use('/upload', uploadRoutes);
 
 // Create Folder
 app.use('/create',createRoutes);
+
+
+
 
 app.use(handleNotFound);
 
