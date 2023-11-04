@@ -2,9 +2,11 @@
 import fs from 'fs';
 import path from 'path';
 import express from 'express';
+import session from 'express-session';
+import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import session from 'express-session';
+
 
 //My modules
 import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
@@ -26,6 +28,7 @@ const __dirname = dirname(currentFilePath);
 //settings
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(cors());
 
 // Configuración de express-session
 app.use(session({
