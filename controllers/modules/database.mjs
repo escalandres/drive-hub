@@ -66,16 +66,20 @@ export async function registerNewUser(user) {
 
 async function registrarOTP(email) {
   try {
-    const otp = generarOTP();
-    const timeStamp = generarTimestamp();
-    const client = await connect()
-    const dbResult = await client.collection("otp").insertOne({otp: otp,email:email, timestamp: timeStamp});
+    let dbResult = getUser(email);
+    if(dbResult.success){
+      const username = dbResult.user.name;
+      const otp = generarOTP();
+      const timeStamp = generarTimestamp();
+      const client = await connect()
+      dbResult = await client.collection("otp").insertOne({otp: otp,email:email, timestamp: timeStamp});
 
-    if (dbResult.acknowledged) {
-      return { success: true, result: otp, error: "" };
-    } else {
-      return { success: false, result: "", error: "No se pudo crear el usuario" }
-    }
+      if (dbResult.acknowledged) {
+        return { success: true, result: {otp: otp, name: username}, error: "" };
+      } else {
+        return { success: false, result: "", error: "No se pudo crear el usuario" }
+      }
+    }else return { success: false, result: "", error: "No existe el usuario" }
   } catch (error) {
     console.error('Ocurrio un error:', error);
     return { success: false, user: {}, error: error }

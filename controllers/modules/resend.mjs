@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 import { PLANTILLAS, createEmail } from './email.mjs';
 const key = process.env.RESEND_API_KEY;
 
-export async function sendEmail(userEmail, userName, code) {
+export async function sendRecoverEmail(userEmail, userName, code) {
     try {
         const email = createEmail(PLANTILLAS.recover, userName, code);
         const resend = new Resend(key);

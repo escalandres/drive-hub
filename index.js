@@ -4,6 +4,8 @@ import path from 'path';
 import express from 'express';
 import session from 'express-session';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -29,6 +31,7 @@ const __dirname = dirname(currentFilePath);
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors());
+app.use(cookieParser());
 
 // Configuración de express-session
 app.use(session({

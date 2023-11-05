@@ -1,8 +1,10 @@
 import { getUser, registerNewUser } from "./modules/database.mjs";
+import { sendRecoverEmail } from "./modules/resend.mjs";
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import path from 'path';
 import fs from 'fs';
+import jwt from 'jsonwebtoken';
 
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -13,6 +15,8 @@ const currentFileURL = import.meta.url;
 const currentFilePath = fileURLToPath(currentFileURL);
 // Obtiene el directorio del archivo actual
 const __dirname = dirname(currentFilePath);
+
+
 
 export async function login(req, res){
     try {
@@ -84,17 +88,13 @@ export async function changePassword(req,res){
 export async function generateOTP(req,res){
     try {
         const email = req.body.email;
-    
         const response = await db.registrarOTP(email)
-        if (!response.success) {
-            return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
-        }
-
-        const respuesta = await bot.enviarOTP(response.result, email)
-        if (!respuesta.success) {
-            return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
-        }
-
+        if (!response.success) return res.status(401).json({ success: false, messageCode: "Error al crear su cuenta de usuario. Inténtelo nuevamente" });
+        const token = jwt.sign({ email: email }, process.env.KEY, { expiresIn: '10m' });
+        res.cookie('authToken', token, { maxAge: 10 * 60 * 1000 });
+        const respuesta = await sendRecoverEmail(email,response.result.name,response.result.otp)
+        if (!respuesta.success) return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
+        
         return res.status(200).json({ success: true })
     } catch (error) {
         console.error(error);
@@ -107,18 +107,10 @@ export async function checkOTP(req,res){
     try {
         const { otp, email } = req.body;
         const response = await db.getOTP(email)
-        if (!response.success) {
-            return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
-        }
+        if (!response.success) return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
 
-        if (!Date.now() < response.timestamp) {
-            console.log('Es mayor')
-            return res.status(401).json({ success: false, message: "El código de seguridad ha expirado. Inténtelo nuevamente" })
-        }
-
-        if (otp !== response.result.otp.toString()) {
-            return res.status(401).json({ success: false, message: "El código de seguridad ingresado es incorrecto" })
-        }
+        if (!Date.now() < response.timestamp) return res.status(401).json({ success: false, message: "El código de seguridad ha expirado. Inténtelo nuevamente" })
+        if (otp !== response.result.otp.toString()) return res.status(401).json({ success: false, message: "El código de seguridad ingresado es incorrecto" })
 
         return res.status(200).json({ success: true })
     } catch (error) {
