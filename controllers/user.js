@@ -1,4 +1,4 @@
-import { getUser, registerNewUser } from "./modules/database.mjs";
+import { getUser, registerNewUser, changePassword, getOTP, registrarOTP } from "./modules/database.mjs";
 import { sendRecoverEmail } from "./modules/resend.mjs";
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
@@ -67,11 +67,11 @@ export async function logout(req,res){
     });
 }
 
-export async function changePassword(req,res){
+export async function changeUserPassword(req,res){
     try {
         const { password, email } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        const response = await db.changePassword(email, hashedPassword)
+        const response = await changePassword(email, hashedPassword)
 
         if (!response.success) {
             return res.status(401).json({ success: false, message: "No se pudo actualizar la contraseña" })
@@ -87,7 +87,7 @@ export async function changePassword(req,res){
 export async function generateOTP(req,res){
     try {
         const email = req.body.email;
-        const response = await db.registrarOTP(email)
+        const response = await registrarOTP(email)
         if (!response.success) return res.status(401).json({ success: false, messageCode: "Error al crear su cuenta de usuario. Inténtelo nuevamente" });
         const token = jwt.sign({ email: email }, process.env.KEY, { expiresIn: '10m' });
         res.cookie('authToken', token, { maxAge: 10 * 60 * 1000 });
@@ -107,7 +107,7 @@ export async function checkOTP(req,res){
         const otp = req.body.otp;
         const token = req.cookies.authToken;
         const decoded = jwt.verify(token, process.env.KEY);
-        const response = await db.getOTP(decoded.email)
+        const response = await getOTP(decoded.email)
         if (!response.success) return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
 
         if (!Date.now() < response.timestamp) return res.status(401).json({ success: false, message: "El código de seguridad ha expirado. Inténtelo nuevamente" })

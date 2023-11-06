@@ -12,6 +12,13 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="panel" class="panel" style="display: none;"> 
+        <div class="panel-container">
+            <div class="spinner-border text-light spinne" style="width: 10rem; height: 10rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="flex-row row w-100">
             <div class="col-12">
@@ -38,6 +45,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
     <!-- My scripts -->
-    <script src="/js/recover.js"></script>
+    <script type="module" src="/js/recover.js"></script>
 </body>
 </html>

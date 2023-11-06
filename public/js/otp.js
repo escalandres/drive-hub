@@ -61,6 +61,7 @@ window.addEventListener("keyup", (e) => {
 });
 
 const validateOTP = () => {
+  alert()
   alert("Success");
 };
 
@@ -75,3 +76,25 @@ const startInput = () => {
 };
 
 window.onload = startInput();
+
+async function validate(){
+  showLoading();
+    const response = await fetch('/user/check-otp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        otp: finalInput
+      })
+    });
+    hideLoading();
+    const data = await response.json();
+    if (!data.success) {
+      // Mostrar un mensaje de error si el inicio de sesión falla
+      // alert(data.message);
+      alerta.error("El usuario y/o contraseña no es válido")
+    } else {
+      window.location.href = `/check-otp/${form.elements.email.value}`
+    }
+}

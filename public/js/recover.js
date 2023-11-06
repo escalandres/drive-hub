@@ -1,9 +1,10 @@
+import { showLoading, hideLoading, alerta } from "./general.js";
 const form = document.getElementById("recover-form");
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
     showLoading();
-    const response = await fetch('/user/login', {
+    const response = await fetch('/user/generate-otp', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

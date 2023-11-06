@@ -64,9 +64,10 @@ export async function registerNewUser(user) {
   }
 }
 
-async function registrarOTP(email) {
+export async function registrarOTP(email) {
   try {
-    let dbResult = getUser(email);
+    let dbResult = await getUser(email);
+    // console.log(dbResult)
     if(dbResult.success){
       const username = dbResult.user.name;
       const otp = generarOTP();
@@ -88,7 +89,7 @@ async function registrarOTP(email) {
   }
 }
 
-async function getOTP(email) {
+export async function getOTP(email) {
   console.log('getOTP')
   try {
     let otp = ""
