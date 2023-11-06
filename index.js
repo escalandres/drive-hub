@@ -66,6 +66,8 @@ const handleNotFound = (req, res, next) => {
     return res.status(404).sendFile(path.join(__dirname,'src','views','error.html'));
 };
 
+
+
 // Aplicar los middlewares en orden
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(authenticationMiddleware);
@@ -75,10 +77,13 @@ app.get('/', (req, res) => {
         // Redirigir solo si el usuario no está autenticado
         return res.redirect('/login');
     }
-
     // Si hay una sesión de usuario iniciada, redirige a la ruta /ftp/:userId
     res.redirect(`/drive/mydrive`);
 });
+
+app.get('/error', (req,res)=>{
+    return res.sendFile(path.join(__dirname,'src','views','error.html'));
+})
 
 app.get('/login', (req,res)=>{
     return res.sendFile(path.join(__dirname,'src','views','login.html'))
@@ -89,9 +94,9 @@ app.get('/recover',(req,res)=>{
 })
 
 
-app.get('/check-otp',(req,res)=>{
-    return res.sendFile(path.join(__dirname,'src','views','otp.html'));
-})
+// app.get('/check-otp',(req,res)=>{
+//     return res.sendFile(path.join(__dirname,'src','views','otp.html'));
+// })
 
 app.use('/user', userRoutes);
 

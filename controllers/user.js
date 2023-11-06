@@ -17,7 +17,6 @@ const currentFilePath = fileURLToPath(currentFileURL);
 const __dirname = dirname(currentFilePath);
 
 
-
 export async function login(req, res){
     try {
         const { email, password } = req.body;
@@ -105,17 +104,53 @@ export async function generateOTP(req,res){
 
 export async function checkOTP(req,res){
     try {
-        const { otp, email } = req.body;
-        const response = await db.getOTP(email)
+        const otp = req.body.otp;
+        const token = req.cookies.authToken;
+        const decoded = jwt.verify(token, process.env.KEY);
+        const response = await db.getOTP(decoded.email)
         if (!response.success) return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
 
         if (!Date.now() < response.timestamp) return res.status(401).json({ success: false, message: "El código de seguridad ha expirado. Inténtelo nuevamente" })
         if (otp !== response.result.otp.toString()) return res.status(401).json({ success: false, message: "El código de seguridad ingresado es incorrecto" })
-
-        return res.status(200).json({ success: true })
+        const token2 = jwt.sign({ email: email, otp: otp }, process.env.KEY, { expiresIn: '5m' });
+        res.cookie('changeToken', token2, {maxAge: 5 * 60 * 1000});
+        return res.redirect('/change-password')
     } catch (error) {
         console.error(error);
         // Enviar respuesta JSON indicando fallo
         res.status(401).json({ success: false });
+    }
+}
+
+// Middleware para verificar el token en la cookie
+export function validateAuthToken(req, res, next) {
+    const token = req.cookies.authToken; // Lee el token de la cookie llamada 'token'
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, process.env.KEY);
+            // req.usuario = decoded; // Almacena la información del usuario en 'req' para su posterior uso
+            next(); // El token es válido, permite que la solicitud continúe
+        } catch (error) {
+            return res.redirect('/error');
+            
+        }
+    } else {
+        return res.redirect('/error');
+    }
+}
+
+export function validateChangeToken(req, res, next) {
+    const token = req.cookies.changeToken; // Lee el token de la cookie llamada 'token'
+    if (token) {
+        try {
+            const decoded = jwt.verify(token, process.env.KEY);
+            // req.usuario = decoded; // Almacena la información del usuario en 'req' para su posterior uso
+            next(); // El token es válido, permite que la solicitud continúe
+        } catch (error) {
+            return res.redirect('/error');
+            
+        }
+    } else {
+        return res.redirect('/error');
     }
 }

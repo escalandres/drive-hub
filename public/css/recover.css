@@ -26,3 +26,15 @@ body{
 .link-row a{
     text-decoration: none;
 }
+
+.border-btn{
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+}
+
+/* i{
+    display: inline-block;
+    color: white;
+    height: 20px;
+    width: 20px;
+} */
