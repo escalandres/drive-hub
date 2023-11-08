@@ -9,7 +9,6 @@ import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-
 //My modules
 import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
 import userRoutes from './routes/user.js';
@@ -26,6 +25,7 @@ const currentFileURL = import.meta.url;
 const currentFilePath = fileURLToPath(currentFileURL);
 // Obtiene el directorio del archivo actual
 const __dirname = dirname(currentFilePath);
+global.__dirname = __dirname;
 
 //settings
 app.use(express.json());
