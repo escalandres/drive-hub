@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 
-import { signup, login, logout, changeUserPassword, generateOTP, checkOTP, validateAuthToken, validateChangeToken } from '../controllers/user.js';
+import {  } from '../controllers/file.js';
 
 const router = express.Router();
 
@@ -20,9 +20,6 @@ router.get('/change-password', validateChangeToken, (req,res)=>{
 router.post('/signup', signup);
 router.post('/login', login);
 router.post('/logout', logout);
-router.patch('/change-password', changeUserPassword);
-router.post('/generate-otp', generateOTP);
-router.post('/check-otp', checkOTP);
 // router.get('/')
 
 export default router;
