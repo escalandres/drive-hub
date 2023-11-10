@@ -27,6 +27,7 @@ export async function login(req, res){
         if(!bcrypt.compareSync(password, result.user.password)) {
             return res.status(404).json({success: false, message: "The password is invalid"})
         }
+        // Agregar una cookie con JWT para autenticar a los usuarios
         req.session.user = { id: result.user.id, email: result.user.email };
         return res.status(200).json({ success: true });
     } catch (error) {
