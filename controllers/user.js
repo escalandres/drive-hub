@@ -28,6 +28,8 @@ export async function login(req, res){
             return res.status(404).json({success: false, message: "The password is invalid"})
         }
         // Agregar una cookie con JWT para autenticar a los usuarios
+        const token = jwt.sign({ user: result.user }, process.env.KEY, { expiresIn: '1h' });
+        res.cookie('AuthToken', token, { maxAge: 60 * 10 * 60 * 1000 });
         req.session.user = { id: result.user.id, email: result.user.email };
         return res.status(200).json({ success: true });
     } catch (error) {
@@ -91,7 +93,7 @@ export async function generateOTP(req,res){
         const response = await registrarOTP(email)
         if (!response.success) return res.status(401).json({ success: false, messageCode: "Error al crear su cuenta de usuario. Inténtelo nuevamente" });
         const token = jwt.sign({ email: email }, process.env.KEY, { expiresIn: '10m' });
-        res.cookie('authToken', token, { maxAge: 10 * 60 * 1000 });
+        res.cookie('OtpToken', token, { maxAge: 10 * 60 * 1000 });
         const respuesta = await sendRecoverEmail(email,response.result.name,response.result.otp)
         if (!respuesta.success) return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })
         
@@ -114,7 +116,7 @@ export async function checkOTP(req,res){
         if (!Date.now() < response.timestamp) return res.status(401).json({ success: false, message: "El código de seguridad ha expirado. Inténtelo nuevamente" })
         if (otp !== response.result.otp.toString()) return res.status(401).json({ success: false, message: "El código de seguridad ingresado es incorrecto" })
         const token2 = jwt.sign({ email: email, otp: otp }, process.env.KEY, { expiresIn: '5m' });
-        res.cookie('changeToken', token2, {maxAge: 5 * 60 * 1000});
+        res.cookie('ChangeToken', token2, {maxAge: 5 * 60 * 1000});
         return res.redirect('/change-password')
     } catch (error) {
         console.error(error);
