@@ -6,15 +6,15 @@ import path from 'path';
 import fs from 'fs';
 import jwt from 'jsonwebtoken';
 
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+// import { dirname } from 'path';
+// import { fileURLToPath } from 'url';
 // Set up storage for uploaded files
 
-const currentFileURL = import.meta.url;
-// Convierte la URL del archivo en una ruta de sistema de archivos
-const currentFilePath = fileURLToPath(currentFileURL);
-// Obtiene el directorio del archivo actual
-const __dirname = dirname(currentFilePath);
+// const currentFileURL = import.meta.url;
+// // Convierte la URL del archivo en una ruta de sistema de archivos
+// const currentFilePath = fileURLToPath(currentFileURL);
+// // Obtiene el directorio del archivo actual
+// const __dirname = dirname(currentFilePath);
 
 
 export async function login(req, res){
@@ -27,9 +27,9 @@ export async function login(req, res){
         if(!bcrypt.compareSync(password, result.user.password)) {
             return res.status(404).json({success: false, message: "The password is invalid"})
         }
-        // Agregar una cookie con JWT para autenticar a los usuarios
+        // Agregar una cookie con JWT para autenticar a los usuarios   
         const token = jwt.sign({ user: result.user }, process.env.KEY, { expiresIn: '1h' });
-        res.cookie('AuthToken', token, { maxAge: 60 * 10 * 60 * 1000 });
+        res.cookie('AuthToken', token, { maxAge: 3 * 24 * 60 * 60 * 1000 });
         req.session.user = { id: result.user.id, email: result.user.email };
         return res.status(200).json({ success: true });
     } catch (error) {
@@ -108,7 +108,7 @@ export async function generateOTP(req,res){
 export async function checkOTP(req,res){
     try {
         const otp = req.body.otp;
-        const token = req.cookies.authToken;
+        const token = req.cookies.AuthToken;
         const decoded = jwt.verify(token, process.env.KEY);
         const response = await getOTP(decoded.email)
         if (!response.success) return res.status(401).json({ success: false, message: "Error al crear su cuenta de usuario. Inténtelo nuevamente" })

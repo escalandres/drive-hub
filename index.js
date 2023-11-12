@@ -14,7 +14,7 @@ import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
 import userRoutes from './routes/user.js';
 import uploadRoutes from './routes/upload.js';
 import createRoutes from './routes/create.js';
-
+import { checkCookie } from './controllers/modules/checkCookie.mjs';
 
 
 //Variables modules
@@ -38,26 +38,32 @@ app.use(session({
     secret: process.env.KEY, // Cambia esto a una clave secreta fuerte en producción
     resave: false,
     saveUninitialized: false,
-    // cookie: {
-    //     maxAge: 1000 * 60 * 15, // 15 minutos (en milisegundos)
-    //     secure: false,             // Solo se envía la cookie en conexiones seguras (HTTPS)
-    //     httpOnly: true,           // La cookie solo es accesible por el servidor (no por JavaScript en el navegador)
-    //     sameSite: 'strict',       // Controla cómo se envía la cookie en las solicitudes del mismo sitio
-    //     path: '/',                // Ruta base donde se aplica la cookie
-    //     domain: 'localhost:3001',    // Dominio para el que se aplicará la cookie
-    // },
+    cookie: {
+        maxAge: 15 * 60 * 1000, // 15 minutos (en milisegundos)
+        secure: false,             // Solo se envía la cookie en conexiones seguras (HTTPS)
+        httpOnly: true,           // La cookie solo es accesible por el servidor (no por JavaScript en el navegador)
+        sameSite: 'strict',       // Controla cómo se envía la cookie en las solicitudes del mismo sitio
+        path: '/',                // Ruta base donde se aplica la cookie
+        domain: 'localhost:5321',    // Dominio para el que se aplicará la cookie
+    },
 }));
 
 //Middlewares
 const authenticationMiddleware = (req, res, next) => {
     if (req.url.startsWith("/drive/mydrive")) {
-      // Verificar si el usuario no está autenticado
-      console.log(req.cookies)
-    if (!req.session || !req.session.user) {
-        if(req.cookies.AuthToken){
-        //console.log('Usuario no autenticado. Redirigiendo a /login');
-        return res.redirect('/login');
-    }
+        // Verificar si el usuario no está autenticado
+        
+        if (!req.session || !req.session.user) {
+            const estatus = checkCookie(req.cookies.AuthToken);
+            if(estatus.success){
+                req.session.user = estatus.decoded.user
+                next();
+            }
+            else return res.redirect('/login');
+            //console.log('Usuario no autenticado. Redirigiendo a /login');
+            
+        }
+        console.log('Usuario autenticado');  
     }
     next();
 };
