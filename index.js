@@ -52,7 +52,9 @@ app.use(session({
 const authenticationMiddleware = (req, res, next) => {
     if (req.url.startsWith("/drive/mydrive")) {
       // Verificar si el usuario no está autenticado
+      console.log(req.cookies)
     if (!req.session || !req.session.user) {
+        if(req.cookies.AuthToken){
         //console.log('Usuario no autenticado. Redirigiendo a /login');
         return res.redirect('/login');
     }
