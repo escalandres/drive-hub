@@ -66,6 +66,7 @@ export async function logout(req,res){
             console.error('Error al destruir la sesión:', err);
             return res.status(500).json({success: false, message: "Ha ocurrido un error con su petición. Inténtelo nuevamente"})
         }
+        res.clearCookie('AuthToken');
         return res.status(200).json({success: true})
     });
 }
