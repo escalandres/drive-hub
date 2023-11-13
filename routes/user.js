@@ -10,20 +10,24 @@ const currentFilePath = fileURLToPath(currentFileURL);
 // Obtiene el directorio del archivo actual
 const __dirname = dirname(currentFilePath);
 
-import { signup, login, logout, changeUserPassword, generateOTP, checkOTP, validateAuthToken, validateChangeToken } from '../controllers/user.js';
+import { signup, login, logout, changeUserPassword, generateOTP, checkOTP, validateCheckToken, validateChangeToken } from '../controllers/user.js';
 
 const router = express.Router();
 
-router.get('/check-otp', validateAuthToken, (req,res)=>{
-    return res.sendFile(path.join(__dirname,'../','src','views','otp.html'));
+// router.get('/check-otp',(req,res)=>{
+//     return res.sendFile(path.join(VIEWS_PATH,'otp.html'));
+// })
+
+router.get('/check-otp', validateCheckToken,(req,res)=>{
+    return res.sendFile(path.join(VIEWS_PATH,'otp.html'));
 })
 
 router.get('/change-password', validateChangeToken, (req,res)=>{
-    return res.sendFile(path.join(__dirname,'src','views','change-password.html'));
+    return res.sendFile(path.join(VIEWS_PATH,'change-password.html'));
 })
 
 // router.get('/change-password',  (req,res)=>{
-//     return res.sendFile(path.join(__dirname,'../','src','views','change.html'));
+//     return res.sendFile(path.join(VIEWS_PATH,'change.html'));
 // })
 
 router.post('/signup', signup);

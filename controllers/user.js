@@ -127,8 +127,8 @@ export async function checkOTP(req,res){
 }
 
 // Middleware para verificar el token en la cookie
-export function validateAuthToken(req, res, next) {
-    const token = req.cookies.authToken; // Lee el token de la cookie llamada 'token'
+export function validateCheckToken(req, res, next) {
+    const token = req.cookies.CheckToken; // Lee el token de la cookie llamada 'token'
     if (token) {
         try {
             const decoded = jwt.verify(token, process.env.KEY);
@@ -144,7 +144,7 @@ export function validateAuthToken(req, res, next) {
 }
 
 export function validateChangeToken(req, res, next) {
-    const token = req.cookies.changeToken; // Lee el token de la cookie llamada 'token'
+    const token = req.cookies.ChangeToken; // Lee el token de la cookie llamada 'token'
     if (token) {
         try {
             const decoded = jwt.verify(token, process.env.KEY);

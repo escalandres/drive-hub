@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-//My modules
+// -------------- My modules --------------
 import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
 import userRoutes from './routes/user.js';
 import uploadRoutes from './routes/upload.js';
@@ -17,8 +17,10 @@ import createRoutes from './routes/create.js';
 import { checkCookie } from './controllers/modules/checkCookie.mjs';
 
 
-//Variables modules
+// -------------- Variables modules --------------
 const app = express();
+
+// -------------- Variables Globales --------------
 // Obtiene la URL del archivo actual
 const currentFileURL = import.meta.url;
 // Convierte la URL del archivo en una ruta de sistema de archivos
@@ -26,14 +28,21 @@ const currentFilePath = fileURLToPath(currentFileURL);
 // Obtiene el directorio del archivo actual
 const __dirname = dirname(currentFilePath);
 global.__dirname = __dirname;
+global.VIEWS_PATH = path.join(__dirname, 'src', 'views');
+global.CONTROLLER_PATH = path.join(__dirname, 'controllers');
+global.MODULES_PATH = path.join(__dirname, 'controllers', 'modules');
+// global.ROUTES_PATH = path.join(__dirname, 'src', 'views');
 
-//settings
+
+
+
+// -------------- settings --------------
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors());
 app.use(cookieParser());
 
-// Configuración de express-session
+// -------------- Configuración de express-session  --------------
 app.use(session({
     secret: process.env.KEY, // Cambia esto a una clave secreta fuerte en producción
     resave: false,
@@ -48,7 +57,7 @@ app.use(session({
     },
 }));
 
-//Middlewares
+// -------------- Middlewares --------------
 const authenticationMiddleware = (req, res, next) => {
     if (req.url.startsWith("/drive/mydrive") ) {
         // Verificar si el usuario no está autenticado
@@ -60,8 +69,6 @@ const authenticationMiddleware = (req, res, next) => {
                 next();
             }
             else return res.redirect('/login');
-            //console.log('Usuario no autenticado. Redirigiendo a /login');
-            
         }
         console.log('Usuario autenticado');  
     }
@@ -104,6 +111,10 @@ app.get('/recover',(req,res)=>{
 
 // app.get('/check-otp',(req,res)=>{
 //     return res.sendFile(path.join(__dirname,'src','views','otp.html'));
+// })
+
+// app.get('/check-otp',(req,res)=>{
+//     return res.sendFile(path.join(__views,'otp.html'));
 // })
 
 app.use('/user', userRoutes);
