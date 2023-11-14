@@ -131,6 +131,31 @@ body{
     padding-left: 3.5em !important; /* Espacio para el icono */
 }
 
+.icon {
+    font-weight: 400;
+    color: rgb(30,48,80) !important;
+    font-size: 1.5em;
+}
+
+.dropdown-btn::after {
+    content: none;
+}
+
+#config-icon:hover {
+    animation: girar 3s linear infinite;
+}
+
+.right-btn__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-btn__container > ul {
+    margin: 0 1em;
+}
+
+
 /* ------------------------- Sidebar section ------------------------------- */
 .sidebar-container{
     background-color: var(--sidebar-grey); /* Color de fondo de la barra lateral */
@@ -337,5 +362,15 @@ body{
         .table-scroll {
             max-height: 84vh;
         }
+    }
+}
+
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }
