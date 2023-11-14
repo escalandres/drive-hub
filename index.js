@@ -120,30 +120,30 @@ app.get('/recover',(req,res)=>{
 app.use('/user', userRoutes);
 
 // Aplicar los middlewares en orden
-app.use('/drive/mydrive/:folder?', (req,res,next) =>{
-    const folder = req.params.folder ?? '';
-    // console.log(folder)
-    const fullPath = path.join(__dirname, 'drive',req.session.user.id,folder);
-    express.static(fullPath)(req, res, next);
-});
+// app.use('/drive/mydrive/:folder?', (req,res,next) =>{
+//     const folder = req.params.folder ?? '';
+//     // console.log(folder)
+//     const fullPath = path.join(__dirname, 'drive',req.session.user.id,folder);
+//     express.static(fullPath)(req, res, next);
+// });
 
-app.get('/drive/mydrive/:folder(*)', (req, res) => {
-    // console.log('a')
-    const userID = req.session.user?.id;
-    // console.log(req.params.folder)
-    const folder = req.params.folder ?? ''; // Obtener el valor del parámetro opcional
-    var folderInfo = serveFiles(userID,folder);
-    // console.log('---------------------------')
-    // console.log(JSON.stringify(folderInfo))
-     // Leer el archivo HTML y reemplazar los marcadores de posición con los valores correspondientes
-    const htmlTemplate = fs.readFileSync(path.join(__dirname,'src','views','drive.html'), 'utf8');
-    const html = htmlTemplate
-        .replace('{folderInfo}', JSON.stringify(folderInfo));
+// app.get('/drive/mydrive/:folder(*)', (req, res) => {
+//     // console.log('a')
+//     const userID = req.session.user?.id;
+//     // console.log(req.params.folder)
+//     const folder = req.params.folder ?? ''; // Obtener el valor del parámetro opcional
+//     var folderInfo = serveFiles(userID,folder);
+//     // console.log('---------------------------')
+//     // console.log(JSON.stringify(folderInfo))
+//      // Leer el archivo HTML y reemplazar los marcadores de posición con los valores correspondientes
+//     const htmlTemplate = fs.readFileSync(path.join(__dirname,'src','views','drive.html'), 'utf8');
+//     const html = htmlTemplate
+//         .replace('{folderInfo}', JSON.stringify(folderInfo));
 
-    // Enviar el HTML al cliente >= 
-    // -> 
-    res.send(html);  
-});
+//     // Enviar el HTML al cliente >= 
+//     // -> 
+//     res.send(html);  
+// });
 
 // Middleware personalizado para agregar req.session.user.id al cuerpo de la solicitud
 // app.use('/upload', (req, res, next) => {

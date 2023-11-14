@@ -16,7 +16,12 @@ const router = express.Router();
 // router.get('/change-password',  (req,res)=>{
 //     return res.sendFile(path.join(__dirname,'../','src','views','change.html'));
 // })
-
+router.use('/drive/mydrive/:folder?', (req,res,next) =>{
+    const folder = req.params.folder ?? '';
+    // console.log(folder)
+    const fullPath = path.join(__dirname, '../', 'drive',req.session.user.id,folder);
+    express.static(fullPath)(req, res, next);
+});
 router.get('/drive/mydrive/:folder(*)', serveUserFolder);
 // router.post('/login', login);
 // router.post('/logout', logout);
