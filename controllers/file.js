@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs';
+import { serveFiles } from './modules/searchOnFolder.mjs';
 
 export async function serveUserFolder (req, res) {
     const userID = req.session.user?.id;

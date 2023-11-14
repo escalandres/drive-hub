@@ -27,7 +27,7 @@ class Folder {
 // Busqueda carpeta actual
 export function serveFiles(userID,rutaCarpeta) {
     const miFolder = new Folder('', "");
-    const pathToSearch = rutaCarpeta === '' ? path.join('drive',userID) : path.join('drive',userID,rutaCarpeta)
+    const pathToSearch = rutaCarpeta === '' ? path.join(DRIVE_PATH,userID) : path.join(DRIVE_PATH,userID,rutaCarpeta)
     const elementos = fs.readdirSync(pathToSearch);
     // Recorrer la lista de elementos
     elementos.forEach((elemento) => {

@@ -14,6 +14,7 @@ import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
 import userRoutes from './routes/user.js';
 import uploadRoutes from './routes/upload.js';
 import createRoutes from './routes/create.js';
+import fileRoutes from './routes/file.js';
 import { checkCookie } from './controllers/modules/checkCookie.mjs';
 
 
@@ -31,7 +32,7 @@ global.__dirname = __dirname;
 global.VIEWS_PATH = path.join(__dirname, 'src', 'views');
 global.CONTROLLER_PATH = path.join(__dirname, 'controllers');
 global.MODULES_PATH = path.join(__dirname, 'controllers', 'modules');
-// global.ROUTES_PATH = path.join(__dirname, 'src', 'views');
+global.DRIVE_PATH = path.join(__dirname, 'drive');
 
 
 
@@ -61,16 +62,15 @@ app.use(session({
 const authenticationMiddleware = (req, res, next) => {
     if (req.url.startsWith("/drive/mydrive") ) {
         // Verificar si el usuario no está autenticado
-        
         if (!req.session || !req.session.user) {
             const estatus = checkCookie(req.cookies.AuthToken);
             if(estatus.success){
                 req.session.user = estatus.decoded.user
-                next();
+                // next();
             }
             else return res.redirect('/login');
         }
-        console.log('Usuario autenticado');  
+        // console.log('Usuario autenticado');  
     }
     next();
 };
@@ -78,7 +78,7 @@ const authenticationMiddleware = (req, res, next) => {
 // Middleware para manejar rutas no encontradas
 const handleNotFound = (req, res, next) => {
     // console.log('err')
-    return res.status(404).sendFile(path.join(__dirname,'src','views','error.html'));
+    return res.status(404).sendFile(path.join(VIEWS_PATH,'error.html'));
 };
 
 
@@ -97,46 +97,40 @@ app.get('/', (req, res) => {
 });
 
 app.get('/error', (req,res)=>{
-    return res.sendFile(path.join(__dirname,'src','views','error.html'));
+    return res.sendFile(path.join(VIEWS_PATH,'error.html'));
 })
 
 app.get('/login', (req,res)=>{
-    return res.sendFile(path.join(__dirname,'src','views','login.html'))
+    return res.sendFile(path.join(VIEWS_PATH,'login.html'))
 })
 
 app.get('/recover',(req,res)=>{
-    return res.sendFile(path.join(__dirname,'src','views','recover.html'));
+    return res.sendFile(path.join(VIEWS_PATH,'recover.html'));
 })
 
-
-// app.get('/check-otp',(req,res)=>{
-//     return res.sendFile(path.join(__dirname,'src','views','otp.html'));
-// })
-
-// app.get('/check-otp',(req,res)=>{
-//     return res.sendFile(path.join(__views,'otp.html'));
-// })
-
 app.use('/user', userRoutes);
+
 
 // Aplicar los middlewares en orden
 // app.use('/drive/mydrive/:folder?', (req,res,next) =>{
 //     const folder = req.params.folder ?? '';
 //     // console.log(folder)
-//     const fullPath = path.join(__dirname, 'drive',req.session.user.id,folder);
+//     const fullPath = path.join(DRIVE_PATH,req.session.user.id,folder);
 //     express.static(fullPath)(req, res, next);
 // });
 
+app.use(fileRoutes);
+
 // app.get('/drive/mydrive/:folder(*)', (req, res) => {
 //     // console.log('a')
-//     const userID = req.session.user?.id;
+//     const userID = req.session.user.id;
 //     // console.log(req.params.folder)
 //     const folder = req.params.folder ?? ''; // Obtener el valor del parámetro opcional
 //     var folderInfo = serveFiles(userID,folder);
 //     // console.log('---------------------------')
 //     // console.log(JSON.stringify(folderInfo))
 //      // Leer el archivo HTML y reemplazar los marcadores de posición con los valores correspondientes
-//     const htmlTemplate = fs.readFileSync(path.join(__dirname,'src','views','drive.html'), 'utf8');
+//     const htmlTemplate = fs.readFileSync(path.join(VIEWS_PATH,'drive.html'), 'utf8');
 //     const html = htmlTemplate
 //         .replace('{folderInfo}', JSON.stringify(folderInfo));
 
@@ -145,30 +139,12 @@ app.use('/user', userRoutes);
 //     res.send(html);  
 // });
 
-// Middleware personalizado para agregar req.session.user.id al cuerpo de la solicitud
-// app.use('/upload', (req, res, next) => {
-//     req.userId = req.session.user.id;
-//     next();
-// });
 
-// app.post('/upload/file1', (req,res,next)=>{
-//     console.log('archivos')
-//     console.log(req)
-// })
-
-  // Configura la ruta para manejar las subidas de archivos
+// Configura la ruta para manejar las subidas de archivos
 app.use('/upload', uploadRoutes);
-
-// app.use('/create-folder', (req, res, next) => {
-//     req.folderName = req.body.folderName;
-//     next();
-// });
 
 // Create Folder
 app.use('/create',createRoutes);
-
-
-
 
 app.use(handleNotFound);
 
