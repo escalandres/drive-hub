@@ -1,5 +1,4 @@
 //NPM modules - ECMAScript Modules
-import fs from 'fs';
 import path from 'path';
 import express from 'express';
 import session from 'express-session';
@@ -10,7 +9,6 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 // -------------- My modules --------------
-import {serveFiles} from './controllers/modules/searchOnFolder.mjs';
 import userRoutes from './routes/user.js';
 import uploadRoutes from './routes/upload.js';
 import createRoutes from './routes/create.js';
@@ -81,8 +79,6 @@ const handleNotFound = (req, res, next) => {
     return res.status(404).sendFile(path.join(VIEWS_PATH,'error.html'));
 };
 
-
-
 // Aplicar los middlewares en orden
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(authenticationMiddleware);
@@ -110,35 +106,7 @@ app.get('/recover',(req,res)=>{
 
 app.use('/user', userRoutes);
 
-
-// Aplicar los middlewares en orden
-// app.use('/drive/mydrive/:folder?', (req,res,next) =>{
-//     const folder = req.params.folder ?? '';
-//     // console.log(folder)
-//     const fullPath = path.join(DRIVE_PATH,req.session.user.id,folder);
-//     express.static(fullPath)(req, res, next);
-// });
-
 app.use(fileRoutes);
-
-// app.get('/drive/mydrive/:folder(*)', (req, res) => {
-//     // console.log('a')
-//     const userID = req.session.user.id;
-//     // console.log(req.params.folder)
-//     const folder = req.params.folder ?? ''; // Obtener el valor del parámetro opcional
-//     var folderInfo = serveFiles(userID,folder);
-//     // console.log('---------------------------')
-//     // console.log(JSON.stringify(folderInfo))
-//      // Leer el archivo HTML y reemplazar los marcadores de posición con los valores correspondientes
-//     const htmlTemplate = fs.readFileSync(path.join(VIEWS_PATH,'drive.html'), 'utf8');
-//     const html = htmlTemplate
-//         .replace('{folderInfo}', JSON.stringify(folderInfo));
-
-//     // Enviar el HTML al cliente >= 
-//     // -> 
-//     res.send(html);  
-// });
-
 
 // Configura la ruta para manejar las subidas de archivos
 app.use('/upload', uploadRoutes);
