@@ -6,10 +6,10 @@ export async function sendRecoverEmail(userEmail, userName, code) {
     try {
         const email = createEmail(PLANTILLAS.recover, userName, code);
         const resend = new Resend(process.env.RESEND_API_KEY);
-        console.log(email.subject)
-        console.log(email.html)
+        // console.log(email.subject)
+        // console.log(email.html)
         const data = await resend.emails.send({
-            from: 'drivehub@hub.com',
+            from: 'drivehub@drivehub.com',
             to: userEmail,
             subject: email.subject,
             html: email.html.toString()
