@@ -1,5 +1,5 @@
 import { showLoading, hideLoading, alerta } from "./general.js";
-const logout = document.getElementById('logoutBtn')
+const logout = document.getElementById('logout-btn')
 // Dropzone.options.fileDropzone = { // camelized version of the `id`
 //     paramName: "file", // The name that will be used to transfer the file
 //     maxFilesize: 2, // MB
