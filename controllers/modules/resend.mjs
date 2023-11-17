@@ -15,7 +15,8 @@ export async function sendRecoverEmail(userEmail, userName, code) {
             html: email.html.toString()
         });
         console.log(data)
-        return {success: true, error: ""}
+        let a = data.error === null;
+        return {success: a, error: ""}
     } catch (error) {
         console.error('Error al enviar el correo. ',error);
         return {success: false, error: error}
